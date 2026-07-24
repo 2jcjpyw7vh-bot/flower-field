@@ -1,368 +1,468 @@
-<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f7f3e8"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="שדה הפרחים"><title>שדה הפרחים שלי</title><style>:root{--bg:#f7f3e8;--card:#fffdf7;--ink:#263026;--muted:#657064;--line:#ddd8ca;--accent:#426b4b;--soft:#e6efe4;--warm:#f2e3bd;--danger:#8f3f3f;--shadow:0 8px 28px rgba(38,48,38,.08);}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Arial",sans-serif}button,input,select,textarea{font:inherit}button{touch-action:manipulation;-webkit-tap-highlight-color:transparent;min-height:44px}input,select,textarea{font-size:16px}.app{max-width:980px;margin:auto;padding:env(safe-area-inset-top) 14px calc(90px + env(safe-area-inset-bottom))}header{padding:20px 4px 12px}h1{font-size:30px;margin:4px 0 3px;letter-spacing:-.5px}.subtitle{color:var(--muted);font-size:14px}.now{margin:10px 0 14px;background:linear-gradient(135deg,#eef4e9,#f6ead0);border:1px solid #dce4d4;border-radius:20px;padding:15px;box-shadow:var(--shadow)}.now h2{margin:0 0 8px;font-size:18px}.now-row{display:flex;gap:8px;overflow:auto;padding-bottom:2px}.pill{white-space:nowrap;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 11px;font-size:13px}.toolbar{position:sticky;top:0;z-index:10;background:rgba(247,243,232,.94);backdrop-filter:blur(12px);padding:8px 0 10px}.search{display:flex;gap:8px}.search input{width:100%;border:1px solid var(--line);background:#fff;border-radius:14px;padding:13px 14px;outline:none}.search input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(66,107,75,.12)}.iconbtn{border:0;background:var(--accent);color:#fff;border-radius:14px;padding:0 15px}.filters{display:flex;gap:7px;overflow:auto;padding:9px 0 1px}.filter{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 11px;white-space:nowrap;color:var(--ink)}.filter.active{background:var(--accent);color:#fff;border-color:var(--accent)}.count{font-size:13px;color:var(--muted);margin:8px 3px}.grid{display:grid;grid-template-columns:1fr;gap:12px}.card{background:var(--card);border:1px solid #e4dfd1;border-radius:20px;padding:15px;box-shadow:var(--shadow)}.cardhead{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.name{font-size:21px;font-weight:750;line-height:1.15}.latin{font-size:13px;color:var(--muted);direction:ltr;text-align:right;margin-top:4px}.star{border:0;background:transparent;font-size:24px;padding:0;color:#a6aaa4}.star.on{color:#d6a831}.badges{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}.badge{font-size:12px;background:var(--soft);border-radius:999px;padding:5px 8px}.badge.warm{background:var(--warm)}.facts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}.fact{background:#faf8f0;border-radius:12px;padding:9px}.fact b{display:block;font-size:12px;color:var(--muted);margin-bottom:3px}.fact span{font-size:14px}.notes{font-size:14px;line-height:1.45;color:#414b41;margin:10px 0}.actions{display:grid;grid-template-columns:1fr 1fr 44px;gap:7px;margin-top:12px}.actions button{border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 8px}.actions .primary{background:var(--accent);color:white;border-color:var(--accent)}.source{font-size:11px;color:#899086;margin-top:9px}.empty{text-align:center;padding:40px 20px;color:var(--muted)}.fab{position:fixed;left:18px;bottom:calc(18px + env(safe-area-inset-bottom));z-index:20;border:0;background:var(--accent);color:#fff;width:58px;height:58px;border-radius:50%;font-size:30px;box-shadow:0 12px 30px rgba(38,48,38,.25)}.modalwrap{display:none;position:fixed;inset:0;z-index:100;background:rgba(20,25,20,.48);padding:18px;align-items:flex-end;justify-content:center}.modalwrap.open{display:flex}.modalpanel{width:min(100%,560px);max-height:90vh;overflow:auto;border-radius:22px;background:#fffdf8;color:var(--ink);box-shadow:0 20px 80px rgba(0,0,0,.25);-webkit-overflow-scrolling:touch}.modal{padding:18px}.modal h3{font-size:22px;margin:0 0 14px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{display:flex;flex-direction:column;gap:5px}.field.full{grid-column:1/-1}.field label{font-size:12px;color:var(--muted)}.field input,.field select,.field textarea{border:1px solid var(--line);border-radius:12px;padding:11px;background:#fff}.field textarea{min-height:80px;resize:vertical}.modalactions{display:flex;gap:8px;margin-top:15px}.modalactions button{flex:1;border:0;border-radius:12px;padding:11px}.save{background:var(--accent);color:#fff}.cancel{background:#ece9df}.danger{background:#f6e1df;color:var(--danger)}.imgbox{min-height:280px;display:grid;place-items:center;background:#f4f1e8;border-radius:16px;overflow:hidden}.imgbox img{width:100%;max-height:60vh;object-fit:contain;display:block}.imgmeta{font-size:12px;color:var(--muted);margin-top:9px}.imgmeta a{color:var(--accent)}.loading{padding:50px 10px;text-align:center;color:var(--muted)}.footer-tools{margin-top:18px;display:flex;gap:7px;flex-wrap:wrap}.footer-tools button{border:1px solid var(--line);background:#fff;border-radius:12px;padding:9px 11px}.notice{font-size:12px;color:var(--muted);line-height:1.5;margin:16px 3px 0}@media(min-width:720px){.grid{grid-template-columns:1fr 1fr}.facts{grid-template-columns:1fr 1fr}.app{padding-left:24px;padding-right:24px}}</style></head><body><div class="app"><header><div class="subtitle">כלי עבודה למגדל פרחי שדה • מותאם לנייד</div><h1>🌼 שדה הפרחים שלי</h1><div class="subtitle">זריעה, קטיף, זרעים ותמונות — במקום אחד</div></header><section class="now"><h2 id="nowTitle">מה קורה החודש?</h2><div class="subtitle" style="margin-bottom:8px">לחיצה על שם תסנן את הרשימה.</div><div class="now-row" id="nowRow"></div></section><div class="toolbar"><div class="search"><input id="q" type="search" placeholder="חיפוש פרח, שם לטיני או שימוש…"><button class="iconbtn" id="clear" title="ניקוי">×</button></div><div class="filters" id="filters"><button class="filter active" data-filter="all">הכול</button><button class="filter" data-filter="sowNow">🌱 לזרוע עכשיו</button><button class="filter" data-filter="harvestNow">✂️ לקטוף עכשיו</button><button class="filter" data-filter="קיץ">☀️ קיץ</button><button class="filter" data-filter="חורף/אביב">❄️ חורף/אביב</button><button class="filter" data-filter="רב-שנתי">🌳 רב-שנתי</button><button class="filter" data-filter="זרעים">🌾 לזרעים</button><button class="filter" data-filter="קטיף עצמי">💐 קטיף עצמי</button><button class="filter" data-filter="fav">★ מועדפים</button></div></div><div class="count" id="count"></div><main class="grid" id="grid"></main><div class="footer-tools"><button id="exportBtn">ייצוא גיבוי</button><button id="importBtn">ייבוא גיבוי</button><button id="resetBtn">שחזור מאגר התחלתי</button><input type="file" id="importFile" accept="application/json" hidden></div><div class="notice">מועדי הזריעה והקטיף הם חלונות עבודה כלליים לישראל ויכולים להשתנות לפי אזור, גובה, מיקרו־אקלים, זן ושיטת גידול. התמונות נשלפות בזמן אמת מ־Wikimedia Commons לפי השם המדעי, ולכן מומלץ לוודא התאמה לזן הספציפי שלך.</div></div><button class="fab" id="addBtn" aria-label="הוספת פרח">＋</button><div class="modalwrap" id="editDlg" aria-hidden="true"><div class="modalpanel"><form class="modal" id="editForm"><h3 id="editTitle">הוספת פרח</h3><input id="editId" type="hidden"><div class="formgrid"><div class="field"><label>שם בעברית</label><input id="editName" required></div><div class="field"><label>שם מדעי</label><input id="editLatin"></div><div class="field"><label>קבוצה</label><select id="editGroup"><option>קיץ</option><option>חורף/אביב</option><option>רב-שנתי</option></select></div><div class="field"><label>מחזור חיים</label><input id="editCycle"></div><div class="field"><label>חודשי זריעה (למשל 9,10,11)</label><input id="editSow"></div><div class="field"><label>חודשי קטיף</label><input id="editHarvest"></div><div class="field"><label>גובה</label><input id="editHeight"></div><div class="field"><label>מרווח</label><input id="editSpacing"></div><div class="field"><label>אור</label><input id="editSun"></div><div class="field"><label>השקיה</label><input id="editWater"></div><div class="field full"><label>שימושים — מופרדים בפסיקים</label><input id="editUses" placeholder="קטיף עצמי, פרח קטיף, זרעים"></div><div class="field full"><label>הערות</label><textarea id="editNotes"></textarea></div></div><div class="modalactions"><button type="button" class="save" id="saveBtn">שמירה</button><button type="button" class="cancel" id="cancelBtn">ביטול</button><button type="button" class="danger" id="deleteBtn" style="display:none">מחיקה</button></div></form></div></div><div class="modalwrap" id="imgDlg" aria-hidden="true"><div class="modalpanel"><div class="modal"><h3 id="imgTitle">תמונה</h3><div class="imgbox" id="imgBox"><div class="loading">מחפש תמונה…</div></div><div class="imgmeta" id="imgMeta"></div><div class="modalactions"><button class="cancel" id="imgClose">סגירה</button></div></div></div></div><script>
-const INITIAL = [{"id":"amaranthus","name":"אמרנטוס / ירבוז","latin":"Amaranthus spp.","group":"קיץ","cycle":"חד-שנתי","sow":[3,4,5,6],"harvest":[6,7,8,9,10],"height":"80–180 ס״מ","spacing":"20–40 ס״מ","sun":"שמש מלאה","water":"בינונית","uses":["קטיף עצמי","פרח קטיף","זרעים"],"notes":"אוהב חום. לזנים גבוהים כדאי לשקול תמיכה. לתוצרת זרעים משאירים תפרחות להבשלה מלאה.","source":"מהרשימה שלך"},{"id":"sorghum","name":"סורגום / דורה קישוטית","latin":"Sorghum bicolor","group":"קיץ","cycle":"חד-שנתי","sow":[3,4,5],"harvest":[6,7,8,9],"height":"120–250 ס״מ","spacing":"20–35 ס״מ","sun":"שמש מלאה","water":"נמוכה–בינונית","uses":["פרח קטיף","זרעים","חומר יבש"],"notes":"גידול חם וחסון. קוצרים תפרחות לפי שלב הבשלות הרצוי; לזרעים נותנים לגרגרים להתייבש היטב.","source":"מהרשימה שלך"},{"id":"millet","name":"דוחן / מילט","latin":"Pennisetum glaucum / Panicum spp.","group":"קיץ","cycle":"חד-שנתי","sow":[4,5,6],"harvest":[6,7,8,9],"height":"80–180 ס״מ","spacing":"20–30 ס״מ","sun":"שמש מלאה","water":"נמוכה–בינונית","uses":["פרח קטיף","זרעים","חומר יבש"],"notes":"מתאים מאוד למראה טבעי בזרי שדה. לזרעים יש להגן מציפורים ככל שהשיבולים מבשילות.","source":"מהרשימה שלך"},{"id":"safflower","name":"חריע","latin":"Carthamus tinctorius","group":"חורף/אביב","cycle":"חד-שנתי","sow":[2,3,4],"harvest":[5,6,7],"height":"60–120 ס״מ","spacing":"15–30 ס״מ","sun":"שמש מלאה","water":"נמוכה–בינונית","uses":["פרח קטיף","זרעים","חומר יבש"],"notes":"סובל יובש לאחר התבססות. יש זנים קוצניים ולכן כדאי לבחור זן לפי אופי הקטיף העצמי.","source":"מהרשימה שלך"},{"id":"snapdragon","name":"לוע הארי","latin":"Antirrhinum majus","group":"חורף/אביב","cycle":"חד-שנתי / דו-שנתי קצר","sow":[9,10,11],"harvest":[1,2,3,4,5],"height":"40–120 ס״מ","spacing":"15–25 ס״מ","sun":"שמש מלאה–חצי צל","water":"בינונית","uses":["קטיף עצמי","פרח קטיף","זרעים"],"notes":"קור מתון מעודד גבעולים ארוכים. לזרעים משאירים הלקטים על הצמח עד התייבשות.","source":"מהרשימה שלך"},{"id":"ammi","name":"אמי / גזר קישוטי","latin":"Ammi majus / Daucus carota 'Dara'","group":"חורף/אביב","cycle":"חד-שנתי","sow":[9,10,11,12],"harvest":[3,4,5,6],"height":"80–130 ס״מ","spacing":"20–30 ס״מ","sun":"שמש מלאה","water":"בינונית","uses":["פרח קטיף","קטיף עצמי","זרעים"],"notes":"מתאים מאוד כפרח מילוי. זריעה מדורגת מאריכה את חלון הקטיף. רגיש יחסית להעברה כשהשורש מפותח.","source":"מהרשימה שלך"},{"id":"bupleurum","name":"בופלאורום","latin":"Bupleurum rotundifolium","group":"חורף/אביב","cycle":"חד-שנתי","sow":[10,11,12],"harvest":[3,4,5],"height":"50–90 ס״מ","spacing":"15–25 ס״מ","sun":"שמש מלאה","water":"בינונית","uses":["פרח קטיף","קטיף עצמי","זרעים"],"notes":"נביטה טובה יותר בתנאים קרירים. כפרח קטיף מומלץ לקצור כשהתפרחות פתוחות אך עדיין רעננות.","source":"מהרשימה שלך"},{"id":"scabiosa","name":"סקביוזה","latin":"Scabiosa atropurpurea","group":"חורף/אביב","cycle":"חד-שנתי / קצר-חיים","sow":[10,11],"harvest":[3,4,5,6,7],"height":"50–100 ס״מ","spacing":"20–30 ס״מ","sun":"שמש מלאה","water":"בינונית","uses":["קטיף עצמי","פרח קטיף","זרעים","ראשי זרעים"],"notes":"גם ראשי הזרעים דקורטיביים מאוד. קטיף תכוף מעודד המשך פריחה.","source":"מהרשימה שלך"},{"id":"gypsophila","name":"גבסנית","latin":"Gypsophila elegans / G. paniculata","group":"חורף/אביב","cycle":"חד-שנתי / רב-שנתי לפי זן","sow":[9,10,11,12,1,2],"harvest":[12,1,2,3,4,5,6],"height":"40–100 ס״מ","spacing":"20–35 ס״מ","sun":"שמש מלאה","water":"נמוכה–בינונית","uses":["פרח קטיף","קטיף עצמי","זרעים","ייבוש"],"notes":"לסבבי קטיף רציפים כדאי לזרוע בכמה מועדים. חשוב ניקוז טוב.","source":"מהרשימה שלך"},{"id":"eucalyptus","name":"אקליפטוס","latin":"Eucalyptus spp.","group":"רב-שנתי","cycle":"עץ / שיח רב-שנתי","sow":[],"plant":[10,11,12,2,3,4],"harvest":[1,2,3,4,5,6,7,8,9,10,11,12],"height":"לפי מין וגיזום","spacing":"לפי מין ושיטת עיצוב","sun":"שמש מלאה","water":"נמוכה–בינונית לאחר קליטה","uses":["עלווה לקטיף","זרעים","חומר יבש"],"notes":"לייצור ענפי קטיף נהוג לעצב ולגזום בהתאם למין. לא כל מין מתאים לאותה צפיפות.","source":"מהרשימה שלך"},{"id":"olive","name":"ענפי זית","latin":"Olea europaea","group":"רב-שנתי","cycle":"עץ רב-שנתי","sow":[],"plant":[10,11,12,2,3,4],"harvest":[1,2,3,4,5,6,7,8,9,10,11,12],"height":"לפי עיצוב","spacing":"לפי מטע/שדרת קטיף","sun":"שמש מלאה","water":"נמוכה–בינונית","uses":["עלווה לקטיף","חומר יבש"],"notes":"ענפים צעירים ונקיים מתאימים לשזירה. יש להתאים את הגיזום גם לבריאות העץ ולמטרת המטע.","source":"מהרשימה שלך"},{"id":"myrtle","name":"הדס","latin":"Myrtus communis","group":"רב-שנתי","cycle":"שיח רב-שנתי","sow":[],"plant":[10,11,12,2,3,4],"harvest":[1,2,3,4,5,6,7,8,9,10,11,12],"height":"100–300 ס״מ","spacing":"80–150 ס״מ","sun":"שמש מלאה–חצי צל","water":"בינונית","uses":["עלווה לקטיף","זרעים"],"notes":"מגיב היטב לגיזום ומייצר ענפים צעירים. מתאים גם כגדר חיה יצרנית.","source":"מהרשימה שלך"},{"id":"pittosporum","name":"פיטוספורום","latin":"Pittosporum spp.","group":"רב-שנתי","cycle":"שיח רב-שנתי","sow":[],"plant":[10,11,12,2,3,4],"harvest":[1,2,3,4,5,6,7,8,9,10,11,12],"height":"150–400 ס״מ","spacing":"100–200 ס״מ","sun":"שמש–חצי צל","water":"בינונית","uses":["עלווה לקטיף"],"notes":"עלווה עמידה ושימושית לזרי קטיף. גיזום שוטף מסייע לקבל ענפים צעירים ואחידים.","source":"מהרשימה שלך"},{"id":"limonium","name":"עדעד / לימוניום","latin":"Limonium spp.","group":"רב-שנתי","cycle":"רב-שנתי קצר-חיים","sow":[],"plant":[9,10,11],"harvest":[3,4,5,6,7,8],"height":"40–90 ס״מ","spacing":"30–45 ס״מ","sun":"שמש מלאה","water":"נמוכה–בינונית","uses":["פרח קטיף","ייבוש","קטיף עצמי","זרעים"],"notes":"בשטח פתוח בישראל מגדלים לעיתים שנה–שנתיים. מתאים מאוד גם לייבוש.","source":"מהרשימה שלך"},{"id":"zinnia","name":"ציניה","latin":"Zinnia elegans","group":"קיץ","cycle":"חד-שנתי","sow":[3,4,5,6],"harvest":[5,6,7,8,9,10],"height":"40–120 ס״מ","spacing":"20–30 ס״מ","sun":"שמש מלאה","water":"בינונית","uses":["קטיף עצמי","פרח קטיף","זרעים"],"notes":"בחירה מצוינת לקטיף עצמי: צבעונית, מהירה וממשיכה לפרוח לאחר קטיף. להפקת זרעים משאירים פרחים נבחרים להבשלה מלאה.","source":"נוסף למאגר – נתוני גידול כלליים"},{"id":"celosia","name":"צלוזיה / כרבולת","latin":"Celosia argentea","group":"קיץ","cycle":"חד-שנתי","sow":[3,4,5,6],"harvest":[6,7,8,9,10],"height":"30–120 ס״מ","spacing":"15–30 ס״מ","sun":"שמש מלאה","water":"בינונית","uses":["קטיף עצמי","פרח קטיף","זרעים","ייבוש"],"notes":"אוהבת חום ומתאימה גם לייבוש. קל יחסית לאסוף זרעים מתפרחות בשלות ויבשות.","source":"נוסף למאגר – נתוני גידול כלליים"},{"id":"sunflower","name":"חמנית","latin":"Helianthus annuus","group":"קיץ","cycle":"חד-שנתי","sow":[2,3,4,5,6,7],"harvest":[4,5,6,7,8,9,10],"height":"60–250 ס״מ","spacing":"15–45 ס״מ","sun":"שמש מלאה","water":"בינונית","uses":["קטיף עצמי","פרח קטיף","זרעים"],"notes":"לרצף קטיף מומלץ לזרוע בסבבים. לפרחי קטיף מסחריים מעדיפים לעיתים זנים חד-גבעוליים ולזרעים זנים מסועפים/ייעודיים.","source":"נוסף למאגר – נתוני גידול כלליים"},{"id":"cosmos","name":"קוסמוס","latin":"Cosmos bipinnatus","group":"קיץ","cycle":"חד-שנתי","sow":[3,4,5,6],"harvest":[5,6,7,8,9,10],"height":"70–150 ס״מ","spacing":"25–40 ס״מ","sun":"שמש מלאה","water":"נמוכה–בינונית","uses":["קטיף עצמי","פרח קטיף","זרעים"],"notes":"קל לגידול ומתאים למראה שדה טבעי. קטיף תכוף מאריך פריחה; לזרעים משאירים חלק מהפרחים להבשיל.","source":"נוסף למאגר – נתוני גידול כלליים"},{"id":"gomphrena","name":"גומפרנה","latin":"Gomphrena globosa","group":"קיץ","cycle":"חד-שנתי","sow":[3,4,5,6],"harvest":[6,7,8,9,10],"height":"30–70 ס״מ","spacing":"20–30 ס״מ","sun":"שמש מלאה","water":"נמוכה–בינונית","uses":["קטיף עצמי","פרח קטיף","זרעים","ייבוש"],"notes":"עמידה בחום, מצוינת לייבוש ושומרת צבע היטב. מתאימה מאוד לקטיף עצמי.","source":"נוסף למאגר – נתוני גידול כלליים"},{"id":"calendula","name":"קלנדולה / ציפורני חתול","latin":"Calendula officinalis","group":"חורף/אביב","cycle":"חד-שנתי","sow":[9,10,11,12,1],"harvest":[12,1,2,3,4,5],"height":"30–60 ס״מ","spacing":"20–30 ס״מ","sun":"שמש מלאה–חצי צל","water":"בינונית","uses":["קטיף עצמי","פרח קטיף","זרעים"],"notes":"מתאימה לעונה הקרירה. קל מאוד לראות ולאסוף את הזרעים כשהקרקפות מתייבשות.","source":"נוסף למאגר – נתוני גידול כלליים"},{"id":"nigella","name":"ניג'לה / קצח קישוטי","latin":"Nigella damascena","group":"חורף/אביב","cycle":"חד-שנתי","sow":[10,11,12,1],"harvest":[3,4,5,6],"height":"40–70 ס״מ","spacing":"15–25 ס״מ","sun":"שמש מלאה","water":"נמוכה–בינונית","uses":["פרח קטיף","קטיף עצמי","זרעים","ראשי זרעים","ייבוש"],"notes":"גם הלקטי הזרעים דקורטיביים מאוד. מתאים לזריעה ישירה ולייצור זרעים.","source":"נוסף למאגר – נתוני גידול כלליים"},{"id":"cornflower","name":"דרדר כחול / קורנפלור","latin":"Centaurea cyanus","group":"חורף/אביב","cycle":"חד-שנתי","sow":[10,11,12,1],"harvest":[3,4,5],"height":"40–90 ס״מ","spacing":"15–25 ס״מ","sun":"שמש מלאה","water":"נמוכה–בינונית","uses":["קטיף עצמי","פרח קטיף","זרעים"],"notes":"אוהב עונה קרירה ומתאים לשדה קטיף צבעוני. משאיר זרעים בקלות בסוף העונה.","source":"נוסף למאגר – נתוני גידול כלליים"},{"id":"sweetpea","name":"אפונה ריחנית","latin":"Lathyrus odoratus","group":"חורף/אביב","cycle":"חד-שנתי מטפס","sow":[10,11,12],"harvest":[2,3,4,5],"height":"120–220 ס״מ","spacing":"15–25 ס״מ","sun":"שמש מלאה–חצי צל","water":"בינונית","uses":["קטיף עצמי","פרח קטיף","זרעים"],"notes":"דורשת רשת/תמיכה. קטיף תכוף חשוב להמשך פריחה; להפקת זרעים מפסיקים לקטוף חלק מהתרמילים ומבשילים אותם.","source":"נוסף למאגר – נתוני גידול כלליים"},{"id":"strawflower","name":"הליקריזום / פרח קש","latin":"Xerochrysum bracteatum","group":"חורף/אביב","cycle":"חד-שנתי / קצר-חיים","sow":[9,10,11,12,1,2,3],"harvest":[3,4,5,6,7,8],"height":"50–100 ס״מ","spacing":"20–30 ס״מ","sun":"שמש מלאה","water":"נמוכה–בינונית","uses":["קטיף עצמי","פרח קטיף","זרעים","ייבוש"],"notes":"מעולה לפרחים מיובשים. לייבוש קוצרים לפני פתיחה מלאה של מרכז הפרח.","source":"נוסף למאגר – נתוני גידול כלליים"}];
-const monthNames=["","ינואר","פברואר","מרץ","אפריל","מאי","יוני","יולי","אוגוסט","ספטמבר","אוקטובר","נובמבר","דצמבר"];
-let plants=JSON.parse(localStorage.getItem("flowerFarmPlants")||"null")||JSON.parse(JSON.stringify(INITIAL));
-let favs=new Set(JSON.parse(localStorage.getItem("flowerFarmFavs")||"[]"));
-let filter="all";
-const $=s=>document.querySelector(s);
-const grid=$("#grid"),q=$("#q");
-const nowMonth=new Date().getMonth()+1;
-function save(){localStorage.setItem("flowerFarmPlants",JSON.stringify(plants));localStorage.setItem("flowerFarmFavs",JSON.stringify([...favs]));}
-function months(arr){return(arr&&arr.length)?arr.map(m=>monthNames[m]).join(" · "):"—";}
-function esc(s=""){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));}
-function matchFilter(p){const txt=(p.name+" "+p.latin+" "+(p.uses||[]).join(" ")+" "+p.notes).toLowerCase();if(q.value.trim()&&!txt.includes(q.value.trim().toLowerCase()))return false;if(filter==="all")return true;if(filter==="sowNow")return(p.sow||p.plant||[]).includes(nowMonth);if(filter==="harvestNow")return(p.harvest||[]).includes(nowMonth);if(filter==="fav")return favs.has(p.id);if(["קיץ","חורף/אביב","רב-שנתי"].includes(filter))return p.group===filter;return(p.uses||[]).includes(filter);}
-function render(){const list=plants.filter(matchFilter);$("#count").textContent=`${list.length} מתוך ${plants.length} גידולים`;grid.innerHTML=list.map(p=>`<article class="card"><div class="cardhead"><div><div class="name">${esc(p.name)}</div><div class="latin">${esc(p.latin)}</div></div><button class="star ${favs.has(p.id)?"on":""}" data-star="${esc(p.id)}">${favs.has(p.id)?"★":"☆"}</button></div><div class="badges"><span class="badge ${p.group==="קיץ"?"warm":""}">${esc(p.group)}</span><span class="badge">${esc(p.cycle)}</span>${(p.uses||[]).slice(0,4).map(u=>`<span class="badge">${esc(u)}</span>`).join("")}</div><div class="facts"><div class="fact"><b>${p.sow&&p.sow.length?"זריעה":"שתילה מומלצת"}</b><span>${months((p.sow&&p.sow.length)?p.sow:p.plant)}</span></div><div class="fact"><b>קטיף</b><span>${months(p.harvest)}</span></div><div class="fact"><b>גובה / מרווח</b><span>${esc(p.height||"—")} · ${esc(p.spacing||"—")}</span></div><div class="fact"><b>תנאים</b><span>${esc(p.sun||"—")} · השקיה ${esc(p.water||"—")}</span></div></div><div class="notes">${esc(p.notes||"")}</div><div class="actions"><button class="primary" data-img="flower" data-id="${esc(p.id)}">🌸 תמונת הפרח</button><button data-img="seed" data-id="${esc(p.id)}">🌾 תמונת הזרע</button><button data-edit="${esc(p.id)}" title="עריכה">✎</button></div><div class="source">${esc(p.source||"")}</div></article>`).join("")||`<div class="empty">לא נמצאו גידולים שמתאימים לסינון.</div>`;}
-function renderNow(){$("#nowTitle").textContent=`${monthNames[nowMonth]} — מה רלוונטי עכשיו?`;const sow=plants.filter(p=>(p.sow||p.plant||[]).includes(nowMonth));const har=plants.filter(p=>(p.harvest||[]).includes(nowMonth));const row=$("#nowRow");const chips=[...sow.slice(0,6).map(p=>({t:`🌱 ${p.name}`,n:p.name})),...har.slice(0,6).map(p=>({t:`✂️ ${p.name}`,n:p.name}))];row.innerHTML=chips.length?chips.map(x=>`<button class="pill" data-now="${esc(x.n)}">${esc(x.t)}</button>`).join(""):`<span class="subtitle">אין פריטים בחלון החודש במאגר.</span>`;}
-document.addEventListener("click",e=>{const f=e.target.closest("[data-filter]");if(f){filter=f.dataset.filter;document.querySelectorAll(".filter").forEach(b=>b.classList.toggle("active",b===f));render();}const s=e.target.closest("[data-star]");if(s){const id=s.dataset.star;favs.has(id)?favs.delete(id):favs.add(id);save();render();}const ed=e.target.closest("[data-edit]");if(ed)openEdit(ed.dataset.edit);const im=e.target.closest("[data-img]");if(im)showImage(im.dataset.id,im.dataset.img);const nw=e.target.closest("[data-now]");if(nw){q.value=nw.dataset.now;filter="all";document.querySelectorAll(".filter").forEach(b=>b.classList.toggle("active",b.dataset.filter==="all"));render();window.scrollTo({top:300,behavior:"smooth"});}});
-q.addEventListener("input",render);$("#clear").onclick=()=>{q.value="";render();};
-function openModal(el){el.classList.add("open");el.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";}
-function closeModal(el){el.classList.remove("open");el.setAttribute("aria-hidden","true");document.body.style.overflow="";}
-function openEdit(id=null){const p=id?plants.find(function(x){return x.id===id;}):null;$("#editTitle").textContent=p?"עריכת גידול":"הוספת גידול";$("#editId").value=(p&&p.id)||"";$("#editName").value=(p&&p.name)||"";$("#editLatin").value=(p&&p.latin)||"";$("#editGroup").value=(p&&p.group)||"קיץ";$("#editCycle").value=(p&&p.cycle)||"חד-שנתי";$("#editSow").value=((p&&p.sow)||[]).join(",");$("#editHarvest").value=((p&&p.harvest)||[]).join(",");$("#editHeight").value=(p&&p.height)||"";$("#editSpacing").value=(p&&p.spacing)||"";$("#editSun").value=(p&&p.sun)||"שמש מלאה";$("#editWater").value=(p&&p.water)||"בינונית";$("#editUses").value=((p&&p.uses)||[]).join(", ");$("#editNotes").value=(p&&p.notes)||"";$("#deleteBtn").style.display=p?"block":"none";openModal($("#editDlg"));}
-$("#addBtn").onclick=function(){openEdit();};$("#cancelBtn").onclick=function(){closeModal($("#editDlg"));};
-$("#saveBtn").onclick=()=>{const id=$("#editId").value||("custom-"+Date.now());const toMonths=s=>s.split(",").map(x=>parseInt(x.trim())).filter(x=>x>=1&&x<=12);const obj={id,name:$("#editName").value.trim(),latin:$("#editLatin").value.trim(),group:$("#editGroup").value,cycle:$("#editCycle").value.trim(),sow:toMonths($("#editSow").value),harvest:toMonths($("#editHarvest").value),height:$("#editHeight").value.trim(),spacing:$("#editSpacing").value.trim(),sun:$("#editSun").value.trim(),water:$("#editWater").value.trim(),uses:$("#editUses").value.split(",").map(x=>x.trim()).filter(Boolean),notes:$("#editNotes").value.trim(),source:"נוסף/נערך על ידך"};if(!obj.name){alert("יש להזין שם");return;}const i=plants.findIndex(x=>x.id===id);if(i>=0)plants[i]=obj;else plants.unshift(obj);save();closeModal($("#editDlg"));render();renderNow();};
-$("#deleteBtn").onclick=()=>{const id=$("#editId").value;if(!id)return;if(confirm("למחוק את הגידול מהמאגר?")){plants=plants.filter(x=>x.id!==id);favs.delete(id);save();closeModal($("#editDlg"));render();renderNow();}};
-async function commonsImage(query){const api="https://commons.wikimedia.org/w/api.php?origin=*&action=query&format=json&generator=search&gsrnamespace=6&gsrlimit=8&gsrsearch="+encodeURIComponent(query)+"&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=1000";const controller=(typeof AbortController!=="undefined")?new AbortController():null;const timer=controller?setTimeout(function(){controller.abort();},9000):null;const r=await fetch(api,controller?{signal:controller.signal}:{});if(timer)clearTimeout(timer);if(!r.ok)throw new Error("network");const j=await r.json();const pages=Object.values((j.query&&j.query.pages)||{});const usable=pages.filter(function(p){return p.imageinfo&&p.imageinfo[0]&&p.imageinfo[0].thumburl&&!/\.svg$/i.test(p.title);});if(!usable.length)throw new Error("no image");return usable[0];}
-async function showImage(id,type){const p=plants.find(x=>x.id===id);if(!p)return;const term=type==="flower"?" flower blossom":" seeds seed pod";$("#imgTitle").textContent=(type==="flower"?"🌸 ":"🌾 ")+p.name;$("#imgBox").innerHTML=`<div class="loading">מחפש תמונה מתאימה ב־Wikimedia Commons…</div>`;$("#imgMeta").innerHTML="";openModal($("#imgDlg"));try{const page=await commonsImage((p.latin||p.name)+term);const ii=page.imageinfo[0];$("#imgBox").innerHTML=`<img src="${ii.thumburl}" alt="${esc(p.name)}">`;const desc=ii.descriptionurl||("https://commons.wikimedia.org/wiki/"+encodeURIComponent(page.title.replace(/ /g,"_")));const artist=(ii.extmetadata&&ii.extmetadata.Artist&&ii.extmetadata.Artist.value?ii.extmetadata.Artist.value.replace(/<[^>]+>/g,""):"");const lic=(ii.extmetadata&&ii.extmetadata.LicenseShortName&&ii.extmetadata.LicenseShortName.value)||"";$("#imgMeta").innerHTML=`מקור: Wikimedia Commons${artist?" · "+esc(artist):""}${lic?" · "+esc(lic):""} · <a href="${desc}" target="_blank" rel="noopener">עמוד התמונה והרישיון</a>`;}catch(err){const search="https://commons.wikimedia.org/wiki/Special:MediaSearch?type=image&search="+encodeURIComponent((p.latin||p.name)+term);$("#imgBox").innerHTML=`<div class="loading">לא הצלחתי לשלוף תמונה ישירות.<br><br><a href="${search}" target="_blank" rel="noopener">פתיחת חיפוש תמונות ב־Wikimedia Commons</a></div>`;}}
-$("#imgClose").onclick=function(){closeModal($("#imgDlg"));};
-$("#exportBtn").onclick=()=>{const blob=new Blob([JSON.stringify({plants,favs:[...favs]},null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="flower-farm-backup.json";a.click();URL.revokeObjectURL(a.href);};
-$("#importBtn").onclick=()=>$("#importFile").click();
-$("#importFile").onchange=async e=>{try{const data=JSON.parse(await e.target.files[0].text());if(!data||!Array.isArray(data.plants))throw new Error();plants=data.plants;favs=new Set(data.favs||[]);save();render();renderNow();}catch{alert("קובץ הגיבוי אינו תקין");}};
-$("#resetBtn").onclick=()=>{if(confirm("לשחזר את המאגר המקורי? שינויים מקומיים יימחקו.")){plants=JSON.parse(JSON.stringify(INITIAL));favs=new Set();save();render();renderNow();}};
-render();renderNow();
-["editDlg","imgDlg"].forEach(function(id){var el=document.getElementById(id);el.addEventListener("click",function(ev){if(ev.target===el)closeModal(el);});});
-</script><style>
-@media(max-width:719px){
-  .app{padding-left:10px;padding-right:10px}
-  .now-row,.filters{
-    overflow-x:auto;
-    overflow-y:hidden;
-    -webkit-overflow-scrolling:touch;
-    scrollbar-width:none;
-    padding-inline:2px 10px;
-  }
-  .now-row::-webkit-scrollbar,.filters::-webkit-scrollbar{display:none}
-  .pill,.filter{flex:0 0 auto}
-  .toolbar{margin-inline:-10px;padding-inline:10px}
-  .search input{min-width:0}
-  .iconbtn{flex:0 0 52px;padding:0}
-  .card{padding:14px}
-  .actions{grid-template-columns:minmax(0,1fr) minmax(0,1fr) 44px}
-  .actions button{font-size:14px;padding-inline:6px}
-  .fab{left:14px;bottom:calc(14px + env(safe-area-inset-bottom))}
-}
-</style><script>
-/* ===== Improved flower & seed image gallery ===== */
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f7f3e8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="שדה הפרחים">
+<title>שדה הפרחים שלי</title>
 
-const IMAGE_PREFS_KEY = "flowerFarmImagePrefs";
-
-function getImagePrefs(){
-  try{
-    return JSON.parse(localStorage.getItem(IMAGE_PREFS_KEY) || "{}");
-  }catch(e){
-    return {};
-  }
+<style>
+:root{
+  --bg:#f7f3e8;
+  --card:#fffdf7;
+  --ink:#263026;
+  --muted:#657064;
+  --line:#ddd8ca;
+  --accent:#426b4b;
+  --soft:#e6efe4;
+  --warm:#f2e3bd;
+  --danger:#8f3f3f;
+  --shadow:0 8px 28px rgba(38,48,38,.08);
 }
 
-function savePreferredImage(plantId,type,image){
-  const prefs=getImagePrefs();
-  prefs[plantId+"_"+type]=image;
-  localStorage.setItem(IMAGE_PREFS_KEY,JSON.stringify(prefs));
+*{box-sizing:border-box}
+
+html{
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
 }
 
-function getPreferredImage(plantId,type){
-  const prefs=getImagePrefs();
-  return prefs[plantId+"_"+type] || null;
+body{
+  margin:0;
+  min-width:0;
+  overflow-x:hidden;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Arial",sans-serif;
 }
 
-async function searchCommonsImages(query,limit=6){
-  const api=
-    "https://commons.wikimedia.org/w/api.php?origin=*"+
-    "&action=query&format=json"+
-    "&generator=search"+
-    "&gsrnamespace=6"+
-    "&gsrlimit="+limit+
-    "&gsrsearch="+encodeURIComponent(query)+
-    "&prop=imageinfo"+
-    "&iiprop=url|extmetadata"+
-    "&iiurlwidth=900";
+button,input,select,textarea{font:inherit}
 
-  const controller =
-    typeof AbortController!=="undefined" ? new AbortController() : null;
-
-  const timer=controller
-    ? setTimeout(()=>controller.abort(),9000)
-    : null;
-
-  try{
-    const response=await fetch(
-      api,
-      controller ? {signal:controller.signal} : {}
-    );
-
-    if(!response.ok) throw new Error("network");
-
-    const data=await response.json();
-    const pages=Object.values(
-      data.query && data.query.pages ? data.query.pages : {}
-    );
-
-    return pages
-      .filter(p =>
-        p.imageinfo &&
-        p.imageinfo[0] &&
-        p.imageinfo[0].thumburl &&
-        !/\.svg$/i.test(p.title)
-      )
-      .map(p => {
-        const ii=p.imageinfo[0];
-        return {
-          url:ii.thumburl,
-          full:ii.url || ii.thumburl,
-          title:p.title || "",
-          page:ii.descriptionurl || "",
-          license:
-            ii.extmetadata &&
-            ii.extmetadata.LicenseShortName
-              ? ii.extmetadata.LicenseShortName.value
-              : ""
-        };
-      });
-
-  }finally{
-    if(timer) clearTimeout(timer);
-  }
+button{
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+  min-height:44px;
 }
 
-async function getSmartImages(plant,type){
-  const latin=plant.latin || plant.name;
-  let searches;
+input,select,textarea{font-size:16px}
 
-  if(type==="flower"){
-    searches=[
-      latin+" flower",
-      latin+" blossom",
-      latin+" inflorescence"
-    ];
-  }else{
-    searches=[
-      latin+" seed",
-      latin+" seeds",
-      latin+" seed pod",
-      latin+" fruit seeds"
-    ];
-  }
+img{max-width:100%}
 
-  const results=[];
-  const seen=new Set();
-
-  for(const query of searches){
-    try{
-      const found=await searchCommonsImages(query,5);
-
-      for(const image of found){
-        if(!seen.has(image.full)){
-          seen.add(image.full);
-          results.push(image);
-        }
-        if(results.length>=8) break;
-      }
-
-      if(results.length>=8) break;
-    }catch(e){}
-  }
-
-  return results;
+.app{
+  max-width:980px;
+  margin:auto;
+  padding:env(safe-area-inset-top) 14px calc(90px + env(safe-area-inset-bottom));
 }
 
-function imageGalleryCard(image,plant,type,index){
-  const safeTitle=esc(image.title || "Wikimedia Commons");
-  const safeUrl=esc(image.url);
-  const safePage=esc(image.page || "#");
-  const safeLicense=esc(image.license || "");
-
-  return `
-    <div style="
-      background:#fff;
-      border:1px solid #ddd8ca;
-      border-radius:14px;
-      padding:8px;
-      min-width:0;
-    ">
-      <img
-        src="${safeUrl}"
-        alt="${esc(plant.name)}"
-        loading="lazy"
-        style="
-          width:100%;
-          height:180px;
-          object-fit:contain;
-          background:#f5f2e9;
-          border-radius:10px;
-        "
-      >
-
-      <button
-        type="button"
-        data-pick-image="${index}"
-        style="
-          width:100%;
-          margin-top:7px;
-          border:0;
-          border-radius:10px;
-          padding:9px;
-          background:#426b4b;
-          color:white;
-        ">
-        ✓ בחר כתמונה שלי
-      </button>
-
-      <div style="
-        margin-top:6px;
-        font-size:11px;
-        color:#657064;
-        line-height:1.3;
-      ">
-        ${safeLicense ? safeLicense+" · " : ""}
-        <a
-          href="${safePage}"
-          target="_blank"
-          rel="noopener"
-          style="color:#426b4b"
-        >מקור</a>
-      </div>
-    </div>
-  `;
+header{
+  padding:20px 4px 12px;
 }
 
-/* מחליף את פונקציית התמונות הישנה */
-showImage=async function(id,type){
-  const plant=plants.find(p=>p.id===id);
-  if(!plant) return;
+.biss-brand{
+  display:flex;
+  justify-content:flex-start;
+  align-items:center;
+  margin:0 0 10px;
+}
 
-  $("#imgTitle").textContent=
-    (type==="flower" ? "🌸 " : "🌾 ")+plant.name;
+.biss-logo{
+  display:block;
+  width:112px;
+  height:auto;
+  max-width:34vw;
+  object-fit:contain;
+}
 
-  $("#imgMeta").innerHTML="";
-  openModal($("#imgDlg"));
+h1{
+  font-size:30px;
+  margin:4px 0 3px;
+  letter-spacing:-.5px;
+}
 
-  const preferred=getPreferredImage(id,type);
+.subtitle{
+  color:var(--muted);
+  font-size:14px;
+}
 
-  $("#imgBox").innerHTML=preferred
-    ? `
-      <div style="width:100%">
-        <div style="
-          font-size:13px;
-          margin-bottom:8px;
-          color:#426b4b;
-          font-weight:700;
-        ">
-          ★ התמונה שבחרת
-        </div>
+.now{
+  margin:10px 0 14px;
+  background:linear-gradient(135deg,#eef4e9,#f6ead0);
+  border:1px solid #dce4d4;
+  border-radius:20px;
+  padding:15px;
+  box-shadow:var(--shadow);
+}
 
-        <img
-          src="${esc(preferred.url)}"
-          alt="${esc(plant.name)}"
-          style="
-            width:100%;
-            max-height:320px;
-            object-fit:contain;
-            border-radius:14px;
-            background:#f5f2e9;
-          "
-        >
+.now h2{
+  margin:0 0 8px;
+  font-size:18px;
+}
 
-        <div
-          id="moreImageResults"
-          class="loading"
-          style="padding:18px 5px"
-        >
-          מחפש גם תמונות חלופיות…
-        </div>
-      </div>
-    `
-    : `<div class="loading">מחפש כמה תמונות מתאימות…</div>`;
+.now-row{
+  display:flex;
+  gap:8px;
+  overflow:auto;
+  padding-bottom:2px;
+}
 
-  try{
-    const images=await getSmartImages(plant,type);
+.pill{
+  white-space:nowrap;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:999px;
+  padding:8px 11px;
+  font-size:13px;
+}
 
-    if(!images.length)
-      throw new Error("no images");
+.toolbar{
+  position:sticky;
+  top:0;
+  z-index:10;
+  background:rgba(247,243,232,.94);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  padding:8px 0 10px;
+}
 
-    const gallery=`
-      <div style="width:100%">
-        ${
-          preferred
-          ? `<div style="
-               margin:14px 0 8px;
-               font-size:13px;
-               font-weight:700;
-             ">תמונות חלופיות</div>`
-          : ""
-        }
+.search{
+  display:flex;
+  gap:8px;
+}
 
-        <div style="
-          display:grid;
-          grid-template-columns:repeat(2,minmax(0,1fr));
-          gap:9px;
-          width:100%;
-        ">
-          ${images.slice(0,4)
-            .map((img,i)=>imageGalleryCard(img,plant,type,i))
-            .join("")}
-        </div>
-      </div>
-    `;
+.search input{
+  width:100%;
+  min-width:0;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:14px;
+  padding:13px 14px;
+  outline:none;
+}
 
-    if(preferred){
-      const more=document.getElementById("moreImageResults");
-      if(more) more.outerHTML=gallery;
-    }else{
-      $("#imgBox").innerHTML=gallery;
-    }
+.search input:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(66,107,75,.12);
+}
 
-    $("#imgBox")
-      .querySelectorAll("[data-pick-image]")
-      .forEach(btn=>{
-        btn.onclick=function(){
-          const image=images[Number(this.dataset.pickImage)];
-          savePreferredImage(id,type,image);
+.iconbtn{
+  border:0;
+  background:var(--accent);
+  color:#fff;
+  border-radius:14px;
+  padding:0 15px;
+}
 
-          this.textContent="★ נשמרה";
-          this.style.background="#d6a831";
+.filters{
+  display:flex;
+  gap:7px;
+  overflow:auto;
+  padding:9px 0 1px;
+}
 
-          setTimeout(()=>{
-            showImage(id,type);
-          },350);
-        };
-      });
+.filter{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:999px;
+  padding:8px 11px;
+  white-space:nowrap;
+  color:var(--ink);
+}
 
-  }catch(err){
-    const search=
-      "https://commons.wikimedia.org/wiki/Special:MediaSearch"+
-      "?type=image&search="+
-      encodeURIComponent(
-        (plant.latin||plant.name)+
-        (type==="flower" ? " flower" : " seed")
-      );
+.filter.active{
+  background:var(--accent);
+  color:#fff;
+  border-color:var(--accent);
+}
 
-    if(!preferred){
-      $("#imgBox").innerHTML=`
-        <div class="loading">
-          לא הצלחתי למצוא כרגע תמונות מתאימות.<br><br>
-          <a
-            href="${search}"
-            target="_blank"
-            rel="noopener"
-          >חיפוש ידני ב-Wikimedia Commons</a>
-        </div>
-      `;
-    }
-  }
-};
-</script><style>
-/* =========================================================
-   FLOWER FIELD FINAL IMAGE + ADMIN PATCH
-   ========================================================= */
+.count{
+  font-size:13px;
+  color:var(--muted);
+  margin:8px 3px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:12px;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid #e4dfd1;
+  border-radius:20px;
+  padding:15px;
+  box-shadow:var(--shadow);
+}
+
+.cardhead{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:flex-start;
+}
+
+.name{
+  font-size:21px;
+  font-weight:750;
+  line-height:1.15;
+}
+
+.latin{
+  font-size:13px;
+  color:var(--muted);
+  direction:ltr;
+  text-align:right;
+  margin-top:4px;
+}
+
+.star{
+  border:0;
+  background:transparent;
+  font-size:24px;
+  padding:0;
+  color:#a6aaa4;
+}
+
+.star.on{color:#d6a831}
+
+.badges{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+  margin:10px 0;
+}
+
+.badge{
+  font-size:12px;
+  background:var(--soft);
+  border-radius:999px;
+  padding:5px 8px;
+}
+
+.badge.warm{background:var(--warm)}
+
+.facts{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin:10px 0;
+}
+
+.fact{
+  background:#faf8f0;
+  border-radius:12px;
+  padding:9px;
+}
+
+.fact b{
+  display:block;
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:3px;
+}
+
+.fact span{font-size:14px}
+
+.notes{
+  font-size:14px;
+  line-height:1.45;
+  color:#414b41;
+  margin:10px 0;
+}
+
+.actions{
+  display:grid;
+  grid-template-columns:1fr 1fr 44px;
+  gap:7px;
+  margin-top:12px;
+}
+
+.actions button{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:12px;
+  padding:10px 8px;
+}
+
+.actions .primary{
+  background:var(--accent);
+  color:white;
+  border-color:var(--accent);
+}
+
+.source{
+  font-size:11px;
+  color:#899086;
+  margin-top:9px;
+}
+
+.empty{
+  text-align:center;
+  padding:40px 20px;
+  color:var(--muted);
+}
+
+.fab{
+  position:fixed;
+  left:18px;
+  bottom:calc(18px + env(safe-area-inset-bottom));
+  z-index:20;
+  border:0;
+  background:var(--accent);
+  color:#fff;
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  font-size:30px;
+  box-shadow:0 12px 30px rgba(38,48,38,.25);
+}
+
+.modalwrap{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:100;
+  background:rgba(20,25,20,.48);
+  padding:18px;
+  align-items:flex-end;
+  justify-content:center;
+}
+
+.modalwrap.open{display:flex}
+
+.modalpanel{
+  width:min(100%,560px);
+  max-height:90vh;
+  overflow:auto;
+  overscroll-behavior:contain;
+  border-radius:22px;
+  background:#fffdf8;
+  color:var(--ink);
+  box-shadow:0 20px 80px rgba(0,0,0,.25);
+  -webkit-overflow-scrolling:touch;
+}
+
+.modal{padding:18px}
+
+.modal h3{
+  font-size:22px;
+  margin:0 0 14px;
+}
+
+.formgrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+
+.field.full{grid-column:1/-1}
+
+.field label{
+  font-size:12px;
+  color:var(--muted);
+}
+
+.field input,
+.field select,
+.field textarea{
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:11px;
+  background:#fff;
+}
+
+.field textarea{
+  min-height:80px;
+  resize:vertical;
+}
+
+.modalactions{
+  display:flex;
+  gap:8px;
+  margin-top:15px;
+  padding-bottom:max(0px,env(safe-area-inset-bottom));
+}
+
+.modalactions button{
+  flex:1;
+  border:0;
+  border-radius:12px;
+  padding:11px;
+}
+
+.save{
+  background:var(--accent);
+  color:#fff;
+}
+
+.cancel{background:#ece9df}
+
+.danger{
+  background:#f6e1df;
+  color:var(--danger);
+}
+
+.imgbox{
+  min-height:280px;
+  display:grid;
+  place-items:center;
+  background:#f4f1e8;
+  border-radius:16px;
+  overflow:hidden;
+}
+
+.imgbox img{
+  width:100%;
+  max-height:60vh;
+  object-fit:contain;
+  display:block;
+}
+
+.imgmeta{
+  font-size:12px;
+  color:var(--muted);
+  margin-top:9px;
+}
+
+.imgmeta a{color:var(--accent)}
+
+.loading{
+  padding:50px 10px;
+  text-align:center;
+  color:var(--muted);
+}
+
+.footer-tools{
+  margin-top:18px;
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+}
+
+.footer-tools button{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:12px;
+  padding:9px 11px;
+}
+
+.notice{
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.5;
+  margin:16px 3px 0;
+}
+
+/* כלי מנהל ותמונות */
 
 .ffx-admin-toggle{
   display:inline-flex;
@@ -484,9 +584,7 @@ showImage=async function(id,type){
   overflow-wrap:anywhere;
 }
 
-.ffx-source a{
-  color:#426b4b;
-}
+.ffx-source a{color:#426b4b}
 
 .ffx-status{
   width:100%;
@@ -495,45 +593,690 @@ showImage=async function(id,type){
   color:#657064;
 }
 
+@media(min-width:720px){
+  .grid{grid-template-columns:1fr 1fr}
+  .app{padding-left:24px;padding-right:24px}
+}
+
 @media(max-width:719px){
+  .app{padding-left:10px;padding-right:10px}
+
+  header{
+    padding-top:max(14px,env(safe-area-inset-top));
+  }
+
+  .biss-logo{
+    width:94px;
+    max-width:30vw;
+  }
+
+  .now-row,.filters{
+    overflow-x:auto;
+    overflow-y:hidden;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    padding-inline:2px 10px;
+  }
+
+  .now-row::-webkit-scrollbar,
+  .filters::-webkit-scrollbar{display:none}
+
+  .pill,.filter{flex:0 0 auto}
+
+  .toolbar{
+    margin-inline:-10px;
+    padding-inline:10px;
+  }
+
+  .iconbtn{
+    flex:0 0 52px;
+    padding:0;
+  }
+
+  .card{padding:14px}
+
+  .actions{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) 44px;
+  }
+
+  .actions button{
+    font-size:14px;
+    padding-inline:6px;
+  }
+
+  .fab{
+    left:14px;
+    bottom:calc(14px + env(safe-area-inset-bottom));
+  }
+
+  .formgrid{grid-template-columns:1fr}
+  .field.full{grid-column:auto}
+
+  .modalwrap{
+    padding:8px;
+    padding-bottom:max(8px,env(safe-area-inset-bottom));
+    align-items:flex-end;
+  }
+
+  .modalpanel{
+    max-height:calc(100dvh - 16px);
+    border-radius:20px 20px 12px 12px;
+  }
+
+  .modal{padding:14px}
+
+  .footer-tools{
+    display:grid;
+    grid-template-columns:1fr;
+  }
+
+  .footer-tools button{width:100%}
+
   .ffx-gallery{
     grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;
   }
+
+  .ffx-image-card{padding:6px}
+
+  .ffx-image-card img{height:145px}
+
+  .ffx-tools-row{
+    display:grid;
+    grid-template-columns:1fr;
+  }
+
+  .ffx-tool-btn{width:100%}
+}
+
+@media(max-width:390px){
+  h1{font-size:26px}
+  .facts{grid-template-columns:1fr}
+
+  .actions{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .actions [data-edit]{
+    grid-column:1/-1;
+    width:100%;
+  }
+
+  .ffx-gallery{grid-template-columns:1fr}
 
   .ffx-image-card img{
-    height:150px;
-  }
-
-  .ffx-card-button{
-    font-size:12px;
+    height:auto;
+    max-height:280px;
   }
 }
+
+@supports(-webkit-touch-callout:none){
+  input,select,textarea{font-size:16px!important}
+}
 </style>
+</head>
 
-<script>
-(function(){
+<body>
 
-"use strict";
+<div class="app">
 
-/* =========================================================
-   SETTINGS
-   ========================================================= */
+<header>
+  <div class="biss-brand">
+    <img
+      src="biss%20logo%20for%20print.png"
+      alt="BISS"
+      class="biss-logo"
+    >
+  </div>
 
-var FFX_ADMIN_PIN = "106106";
+  <div class="subtitle">כלי עבודה למגדל פרחי שדה • מותאם לנייד</div>
+  <h1>🌼 שדה הפרחים שלי</h1>
+  <div class="subtitle">זריעה, קטיף, זרעים ותמונות — במקום אחד</div>
+</header>
 
-var FFX_ADMIN_KEY = "flowerFieldAdminSession_v1";
-var FFX_PREF_KEY = "flowerFieldPreferredImages_v4";
-var FFX_BLOCK_KEY = "flowerFieldBlockedImages_v4";
-var FFX_OWN_KEY = "flowerFieldOwnImages_v4";
+<section class="now">
+  <h2 id="nowTitle">מה קורה החודש?</h2>
+  <div class="subtitle" style="margin-bottom:8px">
+    לחיצה על שם תסנן את הרשימה.
+  </div>
+  <div class="now-row" id="nowRow"></div>
+</section>
 
+<div class="toolbar">
 
-/* =========================================================
-   SAFE STORAGE
-   ========================================================= */
+  <div class="search">
+    <input
+      id="q"
+      type="search"
+      placeholder="חיפוש פרח, שם לטיני או שימוש…"
+    >
+    <button class="iconbtn" id="clear" title="ניקוי">×</button>
+  </div>
+
+  <div class="filters" id="filters">
+    <button class="filter active" data-filter="all">הכול</button>
+    <button class="filter" data-filter="sowNow">🌱 לזרוע עכשיו</button>
+    <button class="filter" data-filter="harvestNow">✂️ לקטוף עכשיו</button>
+    <button class="filter" data-filter="קיץ">☀️ קיץ</button>
+    <button class="filter" data-filter="חורף/אביב">❄️ חורף/אביב</button>
+    <button class="filter" data-filter="רב-שנתי">🌳 רב-שנתי</button>
+    <button class="filter" data-filter="זרעים">🌾 לזרעים</button>
+    <button class="filter" data-filter="קטיף עצמי">💐 קטיף עצמי</button>
+    <button class="filter" data-filter="fav">★ מועדפים</button>
+  </div>
+
+</div>
+
+<div class="count" id="count"></div>
+
+<main class="grid" id="grid"></main>
+
+<div class="footer-tools">
+  <button id="exportBtn">ייצוא גיבוי</button>
+  <button id="importBtn">ייבוא גיבוי</button>
+  <button id="resetBtn">שחזור מאגר התחלתי</button>
+  <input type="file" id="importFile" accept="application/json" hidden>
+</div>
+
+<div class="notice">
+מועדי הזריעה והקטיף הם חלונות עבודה כלליים לישראל ויכולים להשתנות לפי אזור,
+גובה, מיקרו־אקלים, זן ושיטת גידול. התמונות נשלפות בזמן אמת מ־Wikimedia Commons
+לפי השם המדעי, ולכן מומלץ לוודא התאמה לזן הספציפי שלך.
+</div>
+
+</div>
+
+<button class="fab" id="addBtn" aria-label="הוספת פרח">＋</button>
+
+<div class="modalwrap" id="editDlg" aria-hidden="true">
+  <div class="modalpanel">
+    <form class="modal" id="editForm">
+
+      <h3 id="editTitle">הוספת פרח</h3>
+      <input id="editId" type="hidden">
+
+      <div class="formgrid">
+
+        <div class="field">
+          <label>שם בעברית</label>
+          <input id="editName" required>
+        </div>
+
+        <div class="field">
+          <label>שם מדעי</label>
+          <input id="editLatin">
+        </div>
+
+        <div class="field">
+          <label>קבוצה</label>
+          <select id="editGroup">
+            <option>קיץ</option>
+            <option>חורף/אביב</option>
+            <option>רב-שנתי</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>מחזור חיים</label>
+          <input id="editCycle">
+        </div>
+
+        <div class="field">
+          <label>חודשי זריעה (למשל 9,10,11)</label>
+          <input id="editSow">
+        </div>
+
+        <div class="field">
+          <label>חודשי קטיף</label>
+          <input id="editHarvest">
+        </div>
+
+        <div class="field">
+          <label>גובה</label>
+          <input id="editHeight">
+        </div>
+
+        <div class="field">
+          <label>מרווח</label>
+          <input id="editSpacing">
+        </div>
+
+        <div class="field">
+          <label>אור</label>
+          <input id="editSun">
+        </div>
+
+        <div class="field">
+          <label>השקיה</label>
+          <input id="editWater">
+        </div>
+
+        <div class="field full">
+          <label>שימושים — מופרדים בפסיקים</label>
+          <input
+            id="editUses"
+            placeholder="קטיף עצמי, פרח קטיף, זרעים"
+          >
+        </div>
+
+        <div class="field full">
+          <label>הערות</label>
+          <textarea id="editNotes"></textarea>
+        </div>
+
+      </div>
+
+      <div class="modalactions">
+        <button type="button" class="save" id="saveBtn">שמירה</button>
+        <button type="button" class="cancel" id="cancelBtn">ביטול</button>
+        <button
+          type="button"
+          class="danger"
+          id="deleteBtn"
+          style="display:none"
+        >
+          מחיקה
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<div class="modalwrap" id="imgDlg" aria-hidden="true">
+  <div class="modalpanel">
+    <div class="modal">
+
+      <h3 id="imgTitle">תמונה</h3>
+
+      <div class="imgbox" id="imgBox">
+        <div class="loading">מחפש תמונה…</div>
+      </div>
+
+      <div class="imgmeta" id="imgMeta"></div>
+
+      <div class="modalactions">
+        <button class="cancel" id="imgClose">סגירה</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>const INITIAL = [
+{"id":"amaranthus","name":"אמרנטוס / ירבוז","latin":"Amaranthus spp.","group":"קיץ","cycle":"חד-שנתי","sow":[3,4,5,6],"harvest":[6,7,8,9,10],"height":"80–180 ס״מ","spacing":"20–40 ס״מ","sun":"שמש מלאה","water":"בינונית","uses":["קטיף עצמי","פרח קטיף","זרעים"],"notes":"אוהב חום. לזנים גבוהים כדאי לשקול תמיכה. לתוצרת זרעים משאירים תפרחות להבשלה מלאה.","source":"מהרשימה שלך"},
+{"id":"sorghum","name":"סורגום / דורה קישוטית","latin":"Sorghum bicolor","group":"קיץ","cycle":"חד-שנתי","sow":[3,4,5],"harvest":[6,7,8,9],"height":"120–250 ס״מ","spacing":"20–35 ס״מ","sun":"שמש מלאה","water":"נמוכה–בינונית","uses":["פרח קטיף","זרעים","חומר יבש"],"notes":"גידול חם וחסון. קוצרים תפרחות לפי שלב הבשלות הרצוי; לזרעים נותנים לגרגרים להתייבש היטב.","source":"מהרשימה שלך"},
+{"id":"millet","name":"דוחן / מילט","latin":"Pennisetum glaucum / Panicum spp.","group":"קיץ","cycle":"חד-שנתי","sow":[4,5,6],"harvest":[6,7,8,9],"height":"80–180 ס״מ","spacing":"20–30 ס״מ","sun":"שמש מלאה","water":"נמוכה–בינונית","uses":["פרח קטיף","זרעים","חומר יבש"],"notes":"מתאים מאוד למראה טבעי בזרי שדה. לזרעים יש להגן מציפורים ככל שהשיבולים מבשילות.","source":"מהרשימה שלך"},
+{"id":"safflower","name":"חריע","latin":"Carthamus tinctorius","group":"חורף/אביב","cycle":"חד-שנתי","sow":[2,3,4],"harvest":[5,6,7],"height":"60–120 ס״מ","spacing":"15–30 ס״מ","sun":"שמש מלאה","water":"נמוכה–בינונית","uses":["פרח קטיף","זרעים","חומר יבש"],"notes":"סובל יובש לאחר התבססות. יש זנים קוצניים ולכן כדאי לבחור זן לפי אופי הקטיף העצמי.","source":"מהרשימה שלך"},
+{"id":"snapdragon","name":"לוע הארי","latin":"Antirrhinum majus","group":"חורף/אביב","cycle":"חד-שנתי / דו-שנתי קצר","sow":[9,10,11],"harvest":[1,2,3,4,5],"height":"40–120 ס״מ","spacing":"15–25 ס״מ","sun":"שמש מלאה–חצי צל","water":"בינונית","uses":["קטיף עצמי","פרח קטיף","זרעים"],"notes":"קור מתון מעודד גבעולים ארוכים. לזרעים משאירים הלקטים על הצמח עד התייבשות.","source":"מהרשימה שלך"},
+{"id":"ammi","name":"אמי / גזר קישוטי","latin":"Ammi majus / Daucus carota 'Dara'","group":"חורף/אביב","cycle":"חד-שנתי","sow":[9,10,11,12],"harvest":[3,4,5,6],"height":"80–130 ס״מ","spacing":"20–30 ס״מ","sun":"שמש מלאה","water":"בינונית","uses":["פרח קטיף","קטיף עצמי","זרעים"],"notes":"מתאים מאוד כפרח מילוי. זריעה מדורגת מאריכה את חלון הקטיף. רגיש יחסית להעברה כשהשורש מפותח.","source":"מהרשימה שלך"},
+{"id":"bupleurum","name":"בופלאורום","latin":"Bupleurum rotundifolium","group":"חורף/אביב","cycle":"חד-שנתי","sow":[10,11,12],"harvest":[3,4,5],"height":"50–90 ס״מ","spacing":"15–25 ס״מ","sun":"שמש מלאה","water":"בינונית","uses":["פרח קטיף","קטיף עצמי","זרעים"],"notes":"נביטה טובה יותר בתנאים קרירים. כפרח קטיף מומלץ לקצור כשהתפרחות פתוחות אך עדיין רעננות.","source":"מהרשימה שלך"},
+{"id":"scabiosa","name":"סקביוזה","latin":"Scabiosa atropurpurea","group":"חורף/אביב","cycle":"חד-שנתי / קצר-חיים","sow":[10,11],"harvest":[3,4,5,6,7],"height":"50–100 ס״מ","spacing":"20–30 ס״מ","sun":"שמש מלאה","water":"בינונית","uses":["קטיף עצמי","פרח קטיף","זרעים","ראשי זרעים"],"notes":"גם ראשי הזרעים דקורטיביים מאוד. קטיף תכוף מעודד המשך פריחה.","source":"מהרשימה שלך"},
+{"id":"gypsophila","name":"גבסנית","latin":"Gypsophila elegans / G. paniculata","group":"חורף/אביב","cycle":"חד-שנתי / רב-שנתי לפי זן","sow":[9,10,11,12,1,2],"harvest":[12,1,2,3,4,5,6],"height":"40–100 ס״מ","spacing":"20–35 ס״מ","sun":"שמש מלאה","water":"נמוכה–בינונית","uses":["פרח קטיף","קטיף עצמי","זרעים","ייבוש"],"notes":"לסבבי קטיף רציפים כדאי לזרוע בכמה מועדים. חשוב ניקוז טוב.","source":"מהרשימה שלך"},
+{"id":"eucalyptus","name":"אקליפטוס","latin":"Eucalyptus spp.","group":"רב-שנתי","cycle":"עץ / שיח רב-שנתי","sow":[],"plant":[10,11,12,2,3,4],"harvest":[1,2,3,4,5,6,7,8,9,10,11,12],"height":"לפי מין וגיזום","spacing":"לפי מין ושיטת עיצוב","sun":"שמש מלאה","water":"נמוכה–בינונית לאחר קליטה","uses":["עלווה לקטיף","זרעים","חומר יבש"],"notes":"לייצור ענפי קטיף נהוג לעצב ולגזום בהתאם למין. לא כל מין מתאים לאותה צפיפות.","source":"מהרשימה שלך"},
+{"id":"olive","name":"ענפי זית","latin":"Olea europaea","group":"רב-שנתי","cycle":"עץ רב-שנתי","sow":[],"plant":[10,11,12,2,3,4],"harvest":[1,2,3,4,5,6,7,8,9,10,11,12],"height":"לפי עיצוב","spacing":"לפי מטע/שדרת קטיף","sun":"שמש מלאה","water":"נמוכה–בינונית","uses":["עלווה לקטיף","חומר יבש"],"notes":"ענפים צעירים ונקיים מתאימים לשזירה. יש להתאים את הגיזום גם לבריאות העץ ולמטרת המטע.","source":"מהרשימה שלך"},
+{"id":"myrtle","name":"הדס","latin":"Myrtus communis","group":"רב-שנתי","cycle":"שיח רב-שנתי","sow":[],"plant":[10,11,12,2,3,4],"harvest":[1,2,3,4,5,6,7,8,9,10,11,12],"height":"100–300 ס״מ","spacing":"80–150 ס״מ","sun":"שמש מלאה–חצי צל","water":"בינונית","uses":["עלווה לקטיף","זרעים"],"notes":"מגיב היטב לגיזום ומייצר ענפים צעירים. מתאים גם כגדר חיה יצרנית.","source":"מהרשימה שלך"},
+{"id":"pittosporum","name":"פיטוספורום","latin":"Pittosporum spp.","group":"רב-שנתי","cycle":"שיח רב-שנתי","sow":[],"plant":[10,11,12,2,3,4],"harvest":[1,2,3,4,5,6,7,8,9,10,11,12],"height":"150–400 ס״מ","spacing":"100–200 ס״מ","sun":"שמש–חצי צל","water":"בינונית","uses":["עלווה לקטיף"],"notes":"עלווה עמידה ושימושית לזרי קטיף. גיזום שוטף מסייע לקבל ענפים צעירים ואחידים.","source":"מהרשימה שלך"},
+{"id":"limonium","name":"עדעד / לימוניום","latin":"Limonium spp.","group":"רב-שנתי","cycle":"רב-שנתי קצר-חיים","sow":[],"plant":[9,10,11],"harvest":[3,4,5,6,7,8],"height":"40–90 ס״מ","spacing":"30–45 ס״מ","sun":"שמש מלאה","water":"נמוכה–בינונית","uses":["פרח קטיף","ייבוש","קטיף עצמי","זרעים"],"notes":"בשטח פתוח בישראל מגדלים לעיתים שנה–שנתיים. מתאים מאוד גם לייבוש.","source":"מהרשימה שלך"},
+{"id":"zinnia","name":"ציניה","latin":"Zinnia elegans","group":"קיץ","cycle":"חד-שנתי","sow":[3,4,5,6],"harvest":[5,6,7,8,9,10],"height":"40–120 ס״מ","spacing":"20–30 ס״מ","sun":"שמש מלאה","water":"בינונית","uses":["קטיף עצמי","פרח קטיף","זרעים"],"notes":"בחירה מצוינת לקטיף עצמי: צבעונית, מהירה וממשיכה לפרוח לאחר קטיף. להפקת זרעים משאירים פרחים נבחרים להבשלה מלאה.","source":"נוסף למאגר – נתוני גידול כלליים"},
+{"id":"celosia","name":"צלוזיה / כרבולת","latin":"Celosia argentea","group":"קיץ","cycle":"חד-שנתי","sow":[3,4,5,6],"harvest":[6,7,8,9,10],"height":"30–120 ס״מ","spacing":"15–30 ס״מ","sun":"שמש מלאה","water":"בינונית","uses":["קטיף עצמי","פרח קטיף","זרעים","ייבוש"],"notes":"אוהבת חום ומתאימה גם לייבוש. קל יחסית לאסוף זרעים מתפרחות בשלות ויבשות.","source":"נוסף למאגר – נתוני גידול כלליים"},
+{"id":"sunflower","name":"חמנית","latin":"Helianthus annuus","group":"קיץ","cycle":"חד-שנתי","sow":[2,3,4,5,6,7],"harvest":[4,5,6,7,8,9,10],"height":"60–250 ס״מ","spacing":"15–45 ס״מ","sun":"שמש מלאה","water":"בינונית","uses":["קטיף עצמי","פרח קטיף","זרעים"],"notes":"לרצף קטיף מומלץ לזרוע בסבבים. לפרחי קטיף מסחריים מעדיפים לעיתים זנים חד-גבעוליים ולזרעים זנים מסועפים/ייעודיים.","source":"נוסף למאגר – נתוני גידול כלליים"},
+{"id":"cosmos","name":"קוסמוס","latin":"Cosmos bipinnatus","group":"קיץ","cycle":"חד-שנתי","sow":[3,4,5,6],"harvest":[5,6,7,8,9,10],"height":"70–150 ס״מ","spacing":"25–40 ס״מ","sun":"שמש מלאה","water":"נמוכה–בינונית","uses":["קטיף עצמי","פרח קטיף","זרעים"],"notes":"קל לגידול ומתאים למראה שדה טבעי. קטיף תכוף מאריך פריחה; לזרעים משאירים חלק מהפרחים להבשיל.","source":"נוסף למאגר – נתוני גידול כלליים"},
+{"id":"gomphrena","name":"גומפרנה","latin":"Gomphrena globosa","group":"קיץ","cycle":"חד-שנתי","sow":[3,4,5,6],"harvest":[6,7,8,9,10],"height":"30–70 ס״מ","spacing":"20–30 ס״מ","sun":"שמש מלאה","water":"נמוכה–בינונית","uses":["קטיף עצמי","פרח קטיף","זרעים","ייבוש"],"notes":"עמידה בחום, מצוינת לייבוש ושומרת צבע היטב. מתאימה מאוד לקטיף עצמי.","source":"נוסף למאגר – נתוני גידול כלליים"},
+{"id":"calendula","name":"קלנדולה / ציפורני חתול","latin":"Calendula officinalis","group":"חורף/אביב","cycle":"חד-שנתי","sow":[9,10,11,12,1],"harvest":[12,1,2,3,4,5],"height":"30–60 ס״מ","spacing":"20–30 ס״מ","sun":"שמש מלאה–חצי צל","water":"בינונית","uses":["קטיף עצמי","פרח קטיף","זרעים"],"notes":"מתאימה לעונה הקרירה. קל מאוד לראות ולאסוף את הזרעים כשהקרקפות מתייבשות.","source":"נוסף למאגר – נתוני גידול כלליים"},
+{"id":"nigella","name":"ניג'לה / קצח קישוטי","latin":"Nigella damascena","group":"חורף/אביב","cycle":"חד-שנתי","sow":[10,11,12,1],"harvest":[3,4,5,6],"height":"40–70 ס״מ","spacing":"15–25 ס״מ","sun":"שמש מלאה","water":"נמוכה–בינונית","uses":["פרח קטיף","קטיף עצמי","זרעים","ראשי זרעים","ייבוש"],"notes":"גם הלקטי הזרעים דקורטיביים מאוד. מתאים לזריעה ישירה ולייצור זרעים.","source":"נוסף למאגר – נתוני גידול כלליים"},
+{"id":"cornflower","name":"דרדר כחול / קורנפלור","latin":"Centaurea cyanus","group":"חורף/אביב","cycle":"חד-שנתי","sow":[10,11,12,1],"harvest":[3,4,5],"height":"40–90 ס״מ","spacing":"15–25 ס״מ","sun":"שמש מלאה","water":"נמוכה–בינונית","uses":["קטיף עצמי","פרח קטיף","זרעים"],"notes":"אוהב עונה קרירה ומתאים לשדה קטיף צבעוני. משאיר זרעים בקלות בסוף העונה.","source":"נוסף למאגר – נתוני גידול כלליים"},
+{"id":"sweetpea","name":"אפונה ריחנית","latin":"Lathyrus odoratus","group":"חורף/אביב","cycle":"חד-שנתי מטפס","sow":[10,11,12],"harvest":[2,3,4,5],"height":"120–220 ס״מ","spacing":"15–25 ס״מ","sun":"שמש מלאה–חצי צל","water":"בינונית","uses":["קטיף עצמי","פרח קטיף","זרעים"],"notes":"דורשת רשת/תמיכה. קטיף תכוף חשוב להמשך פריחה; להפקת זרעים מפסיקים לקטוף חלק מהתרמילים ומבשילים אותם.","source":"נוסף למאגר – נתוני גידול כלליים"},
+{"id":"strawflower","name":"הליקריזום / פרח קש","latin":"Xerochrysum bracteatum","group":"חורף/אביב","cycle":"חד-שנתי / קצר-חיים","sow":[9,10,11,12,1,2,3],"harvest":[3,4,5,6,7,8],"height":"50–100 ס״מ","spacing":"20–30 ס״מ","sun":"שמש מלאה","water":"נמוכה–בינונית","uses":["קטיף עצמי","פרח קטיף","זרעים","ייבוש"],"notes":"מעולה לפרחים מיובשים. לייבוש קוצרים לפני פתיחה מלאה של מרכז הפרח.","source":"נוסף למאגר – נתוני גידול כלליים"}
+];
+
+const monthNames=["","ינואר","פברואר","מרץ","אפריל","מאי","יוני","יולי","אוגוסט","ספטמבר","אוקטובר","נובמבר","דצמבר"];
+
+let plants=JSON.parse(localStorage.getItem("flowerFarmPlants")||"null")||JSON.parse(JSON.stringify(INITIAL));
+let favs=new Set(JSON.parse(localStorage.getItem("flowerFarmFavs")||"[]"));
+let filter="all";
+
+const $=s=>document.querySelector(s);
+const grid=$("#grid");
+const q=$("#q");
+const nowMonth=new Date().getMonth()+1;
+
+function save(){
+  localStorage.setItem("flowerFarmPlants",JSON.stringify(plants));
+  localStorage.setItem("flowerFarmFavs",JSON.stringify([...favs]));
+}
+
+function months(arr){
+  return(arr&&arr.length)?arr.map(m=>monthNames[m]).join(" · "):"—";
+}
+
+function esc(s=""){
+  return String(s).replace(/[&<>"']/g,m=>({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    "\"":"&quot;",
+    "'":"&#039;"
+  }[m]));
+}
+
+function matchFilter(p){
+  const txt=(p.name+" "+p.latin+" "+(p.uses||[]).join(" ")+" "+p.notes).toLowerCase();
+
+  if(q.value.trim()&&!txt.includes(q.value.trim().toLowerCase()))return false;
+  if(filter==="all")return true;
+  if(filter==="sowNow")return(p.sow||p.plant||[]).includes(nowMonth);
+  if(filter==="harvestNow")return(p.harvest||[]).includes(nowMonth);
+  if(filter==="fav")return favs.has(p.id);
+  if(["קיץ","חורף/אביב","רב-שנתי"].includes(filter))return p.group===filter;
+
+  return(p.uses||[]).includes(filter);
+}
+
+function render(){
+  const list=plants.filter(matchFilter);
+
+  $("#count").textContent=`${list.length} מתוך ${plants.length} גידולים`;
+
+  grid.innerHTML=list.map(p=>`
+    <article class="card">
+      <div class="cardhead">
+        <div>
+          <div class="name">${esc(p.name)}</div>
+          <div class="latin">${esc(p.latin)}</div>
+        </div>
+
+        <button class="star ${favs.has(p.id)?"on":""}" data-star="${esc(p.id)}">
+          ${favs.has(p.id)?"★":"☆"}
+        </button>
+      </div>
+
+      <div class="badges">
+        <span class="badge ${p.group==="קיץ"?"warm":""}">${esc(p.group)}</span>
+        <span class="badge">${esc(p.cycle)}</span>
+        ${(p.uses||[]).slice(0,4).map(u=>`<span class="badge">${esc(u)}</span>`).join("")}
+      </div>
+
+      <div class="facts">
+        <div class="fact">
+          <b>${p.sow&&p.sow.length?"זריעה":"שתילה מומלצת"}</b>
+          <span>${months((p.sow&&p.sow.length)?p.sow:p.plant)}</span>
+        </div>
+
+        <div class="fact">
+          <b>קטיף</b>
+          <span>${months(p.harvest)}</span>
+        </div>
+
+        <div class="fact">
+          <b>גובה / מרווח</b>
+          <span>${esc(p.height||"—")} · ${esc(p.spacing||"—")}</span>
+        </div>
+
+        <div class="fact">
+          <b>תנאים</b>
+          <span>${esc(p.sun||"—")} · השקיה ${esc(p.water||"—")}</span>
+        </div>
+      </div>
+
+      <div class="notes">${esc(p.notes||"")}</div>
+
+      <div class="actions">
+        <button class="primary" data-img="flower" data-id="${esc(p.id)}">🌸 תמונת הפרח</button>
+        <button data-img="seed" data-id="${esc(p.id)}">🌾 תמונת הזרע</button>
+        <button data-edit="${esc(p.id)}" title="עריכה">✎</button>
+      </div>
+
+      <div class="source">${esc(p.source||"")}</div>
+    </article>
+  `).join("")||`<div class="empty">לא נמצאו גידולים שמתאימים לסינון.</div>`;
+}
+
+function renderNow(){
+  $("#nowTitle").textContent=`${monthNames[nowMonth]} — מה רלוונטי עכשיו?`;
+
+  const sow=plants.filter(p=>(p.sow||p.plant||[]).includes(nowMonth));
+  const har=plants.filter(p=>(p.harvest||[]).includes(nowMonth));
+  const row=$("#nowRow");
+
+  const chips=[
+    ...sow.slice(0,6).map(p=>({t:`🌱 ${p.name}`,n:p.name})),
+    ...har.slice(0,6).map(p=>({t:`✂️ ${p.name}`,n:p.name}))
+  ];
+
+  row.innerHTML=chips.length
+    ?chips.map(x=>`<button class="pill" data-now="${esc(x.n)}">${esc(x.t)}</button>`).join("")
+    :`<span class="subtitle">אין פריטים בחלון החודש במאגר.</span>`;
+}document.addEventListener("click",e=>{
+  const f=e.target.closest("[data-filter]");
+  if(f){
+    filter=f.dataset.filter;
+    document.querySelectorAll(".filter").forEach(b=>{
+      b.classList.toggle("active",b===f);
+    });
+    render();
+  }
+
+  const s=e.target.closest("[data-star]");
+  if(s){
+    const id=s.dataset.star;
+    favs.has(id)?favs.delete(id):favs.add(id);
+    save();
+    render();
+  }
+
+  const ed=e.target.closest("[data-edit]");
+  if(ed){
+    openEdit(ed.dataset.edit);
+  }
+
+  const im=e.target.closest("[data-img]");
+  if(im){
+    showImage(im.dataset.id,im.dataset.img);
+  }
+
+  const nw=e.target.closest("[data-now]");
+  if(nw){
+    q.value=nw.dataset.now;
+    filter="all";
+
+    document.querySelectorAll(".filter").forEach(b=>{
+      b.classList.toggle("active",b.dataset.filter==="all");
+    });
+
+    render();
+    window.scrollTo({top:300,behavior:"smooth"});
+  }
+});
+
+q.addEventListener("input",render);
+
+$("#clear").onclick=()=>{
+  q.value="";
+  render();
+};
+
+function openModal(el){
+  el.classList.add("open");
+  el.setAttribute("aria-hidden","false");
+  document.body.style.overflow="hidden";
+}
+
+function closeModal(el){
+  el.classList.remove("open");
+  el.setAttribute("aria-hidden","true");
+  document.body.style.overflow="";
+}
+
+function openEdit(id=null){
+  const p=id?plants.find(x=>x.id===id):null;
+
+  $("#editTitle").textContent=p?"עריכת גידול":"הוספת גידול";
+  $("#editId").value=(p&&p.id)||"";
+  $("#editName").value=(p&&p.name)||"";
+  $("#editLatin").value=(p&&p.latin)||"";
+  $("#editGroup").value=(p&&p.group)||"קיץ";
+  $("#editCycle").value=(p&&p.cycle)||"חד-שנתי";
+  $("#editSow").value=((p&&p.sow)||[]).join(",");
+  $("#editHarvest").value=((p&&p.harvest)||[]).join(",");
+  $("#editHeight").value=(p&&p.height)||"";
+  $("#editSpacing").value=(p&&p.spacing)||"";
+  $("#editSun").value=(p&&p.sun)||"שמש מלאה";
+  $("#editWater").value=(p&&p.water)||"בינונית";
+  $("#editUses").value=((p&&p.uses)||[]).join(", ");
+  $("#editNotes").value=(p&&p.notes)||"";
+  $("#deleteBtn").style.display=p?"block":"none";
+
+  openModal($("#editDlg"));
+}
+
+$("#addBtn").onclick=function(){
+  openEdit();
+};
+
+$("#cancelBtn").onclick=function(){
+  closeModal($("#editDlg"));
+};
+
+$("#saveBtn").onclick=()=>{
+  const id=$("#editId").value||("custom-"+Date.now());
+
+  const toMonths=s=>
+    s.split(",")
+      .map(x=>parseInt(x.trim()))
+      .filter(x=>x>=1&&x<=12);
+
+  const obj={
+    id,
+    name:$("#editName").value.trim(),
+    latin:$("#editLatin").value.trim(),
+    group:$("#editGroup").value,
+    cycle:$("#editCycle").value.trim(),
+    sow:toMonths($("#editSow").value),
+    harvest:toMonths($("#editHarvest").value),
+    height:$("#editHeight").value.trim(),
+    spacing:$("#editSpacing").value.trim(),
+    sun:$("#editSun").value.trim(),
+    water:$("#editWater").value.trim(),
+    uses:$("#editUses").value
+      .split(",")
+      .map(x=>x.trim())
+      .filter(Boolean),
+    notes:$("#editNotes").value.trim(),
+    source:"נוסף/נערך על ידך"
+  };
+
+  if(!obj.name){
+    alert("יש להזין שם");
+    return;
+  }
+
+  const i=plants.findIndex(x=>x.id===id);
+
+  if(i>=0){
+    plants[i]=obj;
+  }else{
+    plants.unshift(obj);
+  }
+
+  save();
+  closeModal($("#editDlg"));
+  render();
+  renderNow();
+};
+
+$("#deleteBtn").onclick=()=>{
+  const id=$("#editId").value;
+
+  if(!id)return;
+
+  if(confirm("למחוק את הגידול מהמאגר?")){
+    plants=plants.filter(x=>x.id!==id);
+    favs.delete(id);
+    save();
+    closeModal($("#editDlg"));
+    render();
+    renderNow();
+  }
+};
+
+$("#imgClose").onclick=function(){
+  closeModal($("#imgDlg"));
+};
+
+$("#exportBtn").onclick=()=>{
+  const blob=new Blob(
+    [JSON.stringify({plants,favs:[...favs]},null,2)],
+    {type:"application/json"}
+  );
+
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download="flower-farm-backup.json";
+  a.click();
+  URL.revokeObjectURL(a.href);
+};
+
+$("#importBtn").onclick=()=>{
+  $("#importFile").click();
+};
+
+$("#importFile").onchange=async e=>{
+  try{
+    const file=e.target.files&&e.target.files[0];
+    if(!file)return;
+
+    const data=JSON.parse(await file.text());
+
+    if(!data||!Array.isArray(data.plants)){
+      throw new Error();
+    }
+
+    plants=data.plants;
+    favs=new Set(data.favs||[]);
+
+    save();
+    render();
+    renderNow();
+
+  }catch(err){
+    alert("קובץ הגיבוי אינו תקין");
+  }
+};
+
+$("#resetBtn").onclick=()=>{
+  if(confirm("לשחזר את המאגר המקורי? שינויים מקומיים יימחקו.")){
+    plants=JSON.parse(JSON.stringify(INITIAL));
+    favs=new Set();
+    save();
+    render();
+    renderNow();
+  }
+};
+
+["editDlg","imgDlg"].forEach(function(id){
+  const el=document.getElementById(id);
+
+  el.addEventListener("click",function(ev){
+    if(ev.target===el){
+      closeModal(el);
+    }
+  });
+});
+
+/* =========================
+   מצב מנהל
+   ========================= */
+
+const FFX_ADMIN_PIN="106106";
+const FFX_ADMIN_KEY="flowerFieldAdminSession_v1";
+const FFX_PREF_KEY="flowerFieldPreferredImages_v4";
+const FFX_BLOCK_KEY="flowerFieldBlockedImages_v4";
+const FFX_OWN_KEY="flowerFieldOwnImages_v4";
 
 function ffxRead(key){
   try{
-    return JSON.parse(localStorage.getItem(key) || "{}");
+    return JSON.parse(localStorage.getItem(key)||"{}");
   }catch(err){
     return {};
   }
@@ -549,17 +1292,12 @@ function ffxWrite(key,value){
 }
 
 function ffxImageKey(id,type){
-  return String(id) + "__" + String(type);
+  return String(id)+"__"+String(type);
 }
-
-
-/* =========================================================
-   ADMIN MODE
-   ========================================================= */
 
 function ffxIsAdmin(){
   try{
-    return sessionStorage.getItem(FFX_ADMIN_KEY) === "yes";
+    return sessionStorage.getItem(FFX_ADMIN_KEY)==="yes";
   }catch(err){
     return false;
   }
@@ -576,206 +1314,162 @@ function ffxSetAdmin(value){
 }
 
 function ffxApplyAdminUI(){
+  const admin=ffxIsAdmin();
 
-  var admin = ffxIsAdmin();
-
-  var addButton = document.getElementById("addBtn");
-
+  const addButton=document.getElementById("addBtn");
   if(addButton){
-    addButton.style.display = admin ? "" : "none";
+    addButton.style.display=admin?"":"none";
   }
 
-  document
-    .querySelectorAll("[data-edit]")
-    .forEach(function(button){
-      button.style.display = admin ? "" : "none";
-    });
+  document.querySelectorAll("[data-edit]").forEach(button=>{
+    button.style.display=admin?"":"none";
+  });
 
-  var toggle = document.getElementById("ffxAdminToggle");
+  document.querySelectorAll("#exportBtn,#importBtn,#resetBtn").forEach(button=>{
+    button.style.display=admin?"":"none";
+  });
+
+  const toggle=document.getElementById("ffxAdminToggle");
 
   if(toggle){
     if(admin){
-      toggle.textContent = "🔓 מצב מנהל פעיל";
+      toggle.textContent="🔓 מצב מנהל פעיל";
       toggle.classList.add("on");
     }else{
-      toggle.textContent = "🔒 מצב צפייה";
+      toggle.textContent="🔒 מצב צפייה";
       toggle.classList.remove("on");
     }
   }
 }
 
 function ffxToggleAdmin(){
-
   if(ffxIsAdmin()){
-
     ffxSetAdmin(false);
     ffxApplyAdminUI();
-
+    render();
     alert("יצאת ממצב מנהל");
     return;
   }
 
-  var entered = prompt("הזן קוד מנהל:");
+  const entered=prompt("הזן קוד מנהל:");
 
-  if(entered === null){
+  if(entered===null){
     return;
   }
 
-  if(entered === FFX_ADMIN_PIN){
-
+  if(entered===FFX_ADMIN_PIN){
     ffxSetAdmin(true);
     ffxApplyAdminUI();
-
+    render();
     alert("מצב מנהל פעיל");
-
   }else{
-
     alert("קוד שגוי");
-
   }
 }
 
 function ffxCreateAdminButton(){
-
   if(document.getElementById("ffxAdminToggle")){
     return;
   }
 
-  var header = document.querySelector("header");
+  const header=document.querySelector("header");
 
   if(!header){
     return;
   }
 
-  var button = document.createElement("button");
+  const button=document.createElement("button");
 
-  button.id = "ffxAdminToggle";
-  button.type = "button";
-  button.className = "ffx-admin-toggle";
-  button.onclick = ffxToggleAdmin;
+  button.id="ffxAdminToggle";
+  button.type="button";
+  button.className="ffx-admin-toggle";
+  button.onclick=ffxToggleAdmin;
 
   header.appendChild(button);
 
   ffxApplyAdminUI();
 }
 
+const originalOpenEdit=openEdit;
 
-/* =========================================================
-   PROTECT EXISTING EDITING
-   ========================================================= */
+openEdit=function(id){
+  if(!ffxIsAdmin()){
+    alert("כדי להוסיף או לערוך יש להפעיל מצב מנהל");
+    return;
+  }
 
-if(typeof openEdit === "function"){
+  return originalOpenEdit(id);
+};
 
-  var ffxOriginalOpenEdit = openEdit;
+const originalRender=render;
 
-  openEdit = function(id){
+render=function(){
+  const result=originalRender.apply(this,arguments);
 
-    if(!ffxIsAdmin()){
-      alert("כדי להוסיף או לערוך יש להפעיל מצב מנהל");
-      return;
-    }
+  setTimeout(ffxApplyAdminUI,0);
 
-    return ffxOriginalOpenEdit(id);
-  };
-}
+  return result;
+};
 
-if(typeof render === "function"){
-
-  var ffxOriginalRender = render;
-
-  render = function(){
-
-    var result =
-      ffxOriginalRender.apply(this,arguments);
-
-    setTimeout(ffxApplyAdminUI,0);
-
-    return result;
-  };
-}
-
-
-/* =========================================================
-   PREFERRED / BLOCKED / OWN IMAGES
-   ========================================================= */
+/* =========================
+   תמונות מועדפות / חסומות / שלך
+   ========================= */
 
 function ffxGetPreferred(id,type){
-
-  var all = ffxRead(FFX_PREF_KEY);
-
-  return all[ffxImageKey(id,type)] || null;
+  const all=ffxRead(FFX_PREF_KEY);
+  return all[ffxImageKey(id,type)]||null;
 }
 
 function ffxSavePreferred(id,type,image){
-
-  var all = ffxRead(FFX_PREF_KEY);
-
-  all[ffxImageKey(id,type)] = image;
-
+  const all=ffxRead(FFX_PREF_KEY);
+  all[ffxImageKey(id,type)]=image;
   ffxWrite(FFX_PREF_KEY,all);
 }
 
 function ffxRemovePreferred(id,type){
-
-  var all = ffxRead(FFX_PREF_KEY);
-
+  const all=ffxRead(FFX_PREF_KEY);
   delete all[ffxImageKey(id,type)];
-
   ffxWrite(FFX_PREF_KEY,all);
 }
 
-
 function ffxBlockedList(id,type){
+  const all=ffxRead(FFX_BLOCK_KEY);
+  const list=all[ffxImageKey(id,type)];
 
-  var all = ffxRead(FFX_BLOCK_KEY);
-
-  var list = all[ffxImageKey(id,type)];
-
-  return Array.isArray(list) ? list : [];
+  return Array.isArray(list)?list:[];
 }
 
 function ffxBlock(id,type,url){
+  if(!url)return;
 
-  if(!url){
-    return;
-  }
-
-  var all = ffxRead(FFX_BLOCK_KEY);
-  var key = ffxImageKey(id,type);
+  const all=ffxRead(FFX_BLOCK_KEY);
+  const key=ffxImageKey(id,type);
 
   if(!Array.isArray(all[key])){
-    all[key] = [];
+    all[key]=[];
   }
 
-  if(all[key].indexOf(url) === -1){
+  if(all[key].indexOf(url)===-1){
     all[key].push(url);
   }
 
   ffxWrite(FFX_BLOCK_KEY,all);
 
-  var preferred = ffxGetPreferred(id,type);
+  const preferred=ffxGetPreferred(id,type);
 
-  if(
-    preferred &&
-    preferred.full === url
-  ){
+  if(preferred&&preferred.full===url){
     ffxRemovePreferred(id,type);
   }
 }
 
-
 function ffxGetOwn(id,type){
-
-  var all = ffxRead(FFX_OWN_KEY);
-
-  return all[ffxImageKey(id,type)] || null;
+  const all=ffxRead(FFX_OWN_KEY);
+  return all[ffxImageKey(id,type)]||null;
 }
 
 function ffxSaveOwn(id,type,dataUrl){
-
-  var all = ffxRead(FFX_OWN_KEY);
-
-  all[ffxImageKey(id,type)] = dataUrl;
+  const all=ffxRead(FFX_OWN_KEY);
+  all[ffxImageKey(id,type)]=dataUrl;
 
   if(!ffxWrite(FFX_OWN_KEY,all)){
     throw new Error("storage");
@@ -783,69 +1477,52 @@ function ffxSaveOwn(id,type,dataUrl){
 }
 
 function ffxDeleteOwn(id,type){
-
-  var all = ffxRead(FFX_OWN_KEY);
-
+  const all=ffxRead(FFX_OWN_KEY);
   delete all[ffxImageKey(id,type)];
-
   ffxWrite(FFX_OWN_KEY,all);
-}
-
-
-/* =========================================================
-   CLEAN LATIN NAME
-   ========================================================= */
+}/* =========================
+   עזרי שמות לצמח
+   ========================= */
 
 function ffxLatinName(plant){
+  let text=String(plant.latin||plant.name||"").trim();
 
-  var text =
-    String(
-      plant.latin ||
-      plant.name ||
-      ""
-    ).trim();
-
-  if(text.indexOf("/") !== -1){
-    text = text.split("/")[0].trim();
+  if(text.indexOf("/")!==-1){
+    text=text.split("/")[0].trim();
   }
 
-  text =
-    text.replace(/\([^)]*\)/g," ")
-        .replace(/\s+/g," ")
-        .trim();
+  text=text
+    .replace(/\([^)]*\)/g," ")
+    .replace(/\s+/g," ")
+    .trim();
 
   return text;
 }
 
 function ffxGenus(plant){
-
-  var latin = ffxLatinName(plant);
-
-  return latin.split(/\s+/)[0] || latin;
+  const latin=ffxLatinName(plant);
+  return latin.split(/\s+/)[0]||latin;
 }
 
-
-/* =========================================================
-   COMMONS RESULT FILTER
-   ========================================================= */
-
 function ffxPlainText(value){
-
-  return String(value || "")
+  return String(value||"")
     .replace(/<[^>]+>/g," ")
     .replace(/&nbsp;/gi," ")
     .replace(/\s+/g," ")
     .trim();
 }
 
-function ffxIsBadImage(image){
+/* =========================
+   סינון תמונות לא רלוונטיות
+   ========================= */
 
-  var text = (
-    String(image.title || "") + " " +
-    String(image.description || "")
+function ffxIsBadImage(image){
+  const text=(
+    String(image.title||"")+" "+
+    String(image.description||"")
   ).toLowerCase();
 
-  var badWords = [
+  const badWords=[
     ".pdf",
     ".djvu",
     ".tif",
@@ -877,969 +1554,718 @@ function ffxIsBadImage(image){
     "herbarium sheet"
   ];
 
-  for(var i=0;i<badWords.length;i++){
-
-    if(text.indexOf(badWords[i]) !== -1){
+  for(let i=0;i<badWords.length;i++){
+    if(text.indexOf(badWords[i])!==-1){
       return true;
     }
   }
 
-  if(
-    image.mime &&
-    image.mime.indexOf("image/") !== 0
-  ){
+  if(image.mime&&image.mime.indexOf("image/")!==0){
     return true;
   }
 
   return false;
 }
 
-
-/* =========================================================
-   IMAGE SCORE
-   ========================================================= */
+/* =========================
+   דירוג תמונות
+   ========================= */
 
 function ffxScore(image,plant,type){
-
-  var text = (
-    String(image.title || "") + " " +
-    String(image.description || "")
+  const text=(
+    String(image.title||"")+" "+
+    String(image.description||"")
   ).toLowerCase();
 
-  var latin = ffxLatinName(plant).toLowerCase();
-  var genus = ffxGenus(plant).toLowerCase();
+  const latin=ffxLatinName(plant).toLowerCase();
+  const genus=ffxGenus(plant).toLowerCase();
 
-  let score = 0;
+  let score=0;
 
-  if(genus && text.indexOf(genus) !== -1){
-    score += 12;
+  if(genus&&text.indexOf(genus)!==-1){
+    score+=12;
   }
 
-  if(
-    latin &&
-    text.indexOf(latin) !== -1
-  ){
-    score += 15;
+  if(latin&&text.indexOf(latin)!==-1){
+    score+=15;
   }
 
-  if(type === "flower"){
-
-    if(
-      /flower|flowers|flowering|blossom|bloom|inflorescence/.test(text)
-    ){
-      score += 12;
+  if(type==="flower"){
+    if(/flower|flowers|flowering|blossom|bloom|inflorescence/.test(text)){
+      score+=12;
     }
 
-    if(
-      /plant|garden|field|stem|foliage/.test(text)
-    ){
-      score += 3;
+    if(/plant|garden|field|stem|foliage/.test(text)){
+      score+=3;
     }
 
-    if(
-      /seed|seeds|fruit|pod/.test(text)
-    ){
-      score -= 3;
+    if(/seed|seeds|fruit|pod/.test(text)){
+      score-=3;
     }
-
   }else{
-
-    if(
-      /\bseed\b|\bseeds\b/.test(text)
-    ){
-      score += 16;
+    if(/\bseed\b|\bseeds\b/.test(text)){
+      score+=16;
     }
 
-    if(
-      /seedhead|seed head|seedpod|seed pod|capsule|achene|grain/.test(text)
-    ){
-      score += 10;
+    if(/seedhead|seed head|seedpod|seed pod|capsule|achene|grain/.test(text)){
+      score+=10;
     }
 
-    if(
-      /fruit|fruits|pod|pods/.test(text)
-    ){
-      score += 5;
+    if(/fruit|fruits|pod|pods/.test(text)){
+      score+=5;
     }
 
-    if(
-      /flower|blossom/.test(text)
-    ){
-      score -= 5;
+    if(/flower|blossom/.test(text)){
+      score-=5;
     }
   }
 
-  if(
-    /photograph|photo|jpg|jpeg/.test(text)
-  ){
-    score += 3;
+  if(/photograph|photo|jpg|jpeg/.test(text)){
+    score+=3;
   }
 
-  if(
-    /illustration|drawing|plate|painting/.test(text)
-  ){
-    score -= 4;
+  if(/illustration|drawing|plate|painting/.test(text)){
+    score-=4;
   }
 
   return score;
 }
 
-
-/* =========================================================
-   WIKIMEDIA COMMONS SEARCH
-   ========================================================= */
+/* =========================
+   Wikimedia Commons
+   ========================= */
 
 async function ffxCommonsQuery(query){
-
-  var url =
-    "https://commons.wikimedia.org/w/api.php" +
-    "?origin=*" +
-    "&action=query" +
-    "&format=json" +
-    "&generator=search" +
-    "&gsrnamespace=6" +
-    "&gsrlimit=20" +
-    "&gsrsearch=" +
-      encodeURIComponent(query) +
-    "&prop=imageinfo" +
-    "&iiprop=url|mime|extmetadata" +
+  const url=
+    "https://commons.wikimedia.org/w/api.php"+
+    "?origin=*"+
+    "&action=query"+
+    "&format=json"+
+    "&generator=search"+
+    "&gsrnamespace=6"+
+    "&gsrlimit=20"+
+    "&gsrsearch="+encodeURIComponent(query)+
+    "&prop=imageinfo"+
+    "&iiprop=url|mime|extmetadata"+
     "&iiurlwidth=900";
 
-  var response = await fetch(url);
+  const controller=
+    typeof AbortController!=="undefined"
+      ?new AbortController()
+      :null;
 
-  if(!response.ok){
-    throw new Error("network");
-  }
+  const timer=controller
+    ?setTimeout(()=>controller.abort(),9000)
+    :null;
 
-  var data = await response.json();
-
-  var pages = Object.values(
-    data.query &&
-    data.query.pages
-      ? data.query.pages
-      : {}
-  );
-
-  return pages
-    .filter(function(page){
-
-      return (
-        page.imageinfo &&
-        page.imageinfo[0] &&
-        page.imageinfo[0].thumburl
-      );
-    })
-    .map(function(page){
-
-      var info = page.imageinfo[0];
-
-      var meta =
-        info.extmetadata || {};
-
-      return {
-
-        url:
-          info.thumburl,
-
-        full:
-          info.url ||
-          info.thumburl,
-
-        title:
-          page.title || "",
-
-        mime:
-          info.mime || "",
-
-        page:
-          info.descriptionurl || "",
-
-        license:
-          meta.LicenseShortName &&
-          meta.LicenseShortName.value
-            ? ffxPlainText(
-                meta.LicenseShortName.value
-              )
-            : "",
-
-        description:
-          meta.ImageDescription &&
-          meta.ImageDescription.value
-            ? ffxPlainText(
-                meta.ImageDescription.value
-              )
-            : "",
-
-        own:false
-      };
-    });
-}
-
-
-/* =========================================================
-   SMART MULTI-QUERY SEARCH
-   ========================================================= */
-
-async function ffxSmartSearch(plant,type){
-
-  var latin = ffxLatinName(plant);
-  var genus = ffxGenus(plant);
-
-  var queries;
-
-  if(type === "flower"){
-
-    queries = [
-      '"' + latin + '" flower',
-      '"' + latin + '" flowering plant',
-      '"' + latin + '" inflorescence',
-      genus + " flower photograph"
-    ];
-
-  }else{
-
-    queries = [
-      '"' + latin + '" seeds',
-      '"' + latin + '" seed',
-      '"' + latin + '" seed head',
-      '"' + latin + '" seed pod',
-      genus + " seeds photograph"
-    ];
-  }
-
-  var blocked =
-    ffxBlockedList(
-      plant.id,
-      type
+  try{
+    const response=await fetch(
+      url,
+      controller?{signal:controller.signal}:{}
     );
 
-  var seen = {};
-  var results = [];
+    if(!response.ok){
+      throw new Error("network");
+    }
 
-  for(
-    var q=0;
-    q<queries.length;
-    q++
-  ){
+    const data=await response.json();
 
+    const pages=Object.values(
+      data.query&&data.query.pages
+        ?data.query.pages
+        :{}
+    );
+
+    return pages
+      .filter(page=>
+        page.imageinfo&&
+        page.imageinfo[0]&&
+        page.imageinfo[0].thumburl
+      )
+      .map(page=>{
+        const info=page.imageinfo[0];
+        const meta=info.extmetadata||{};
+
+        return{
+          url:info.thumburl,
+          full:info.url||info.thumburl,
+          title:page.title||"",
+          mime:info.mime||"",
+          page:info.descriptionurl||"",
+          license:
+            meta.LicenseShortName&&meta.LicenseShortName.value
+              ?ffxPlainText(meta.LicenseShortName.value)
+              :"",
+          description:
+            meta.ImageDescription&&meta.ImageDescription.value
+              ?ffxPlainText(meta.ImageDescription.value)
+              :"",
+          own:false
+        };
+      });
+  }finally{
+    if(timer)clearTimeout(timer);
+  }
+}
+
+/* =========================
+   חיפוש חכם
+   ========================= */
+
+async function ffxSmartSearch(plant,type){
+  const latin=ffxLatinName(plant);
+  const genus=ffxGenus(plant);
+
+  let queries;
+
+  if(type==="flower"){
+    queries=[
+      `"${latin}" flower`,
+      `"${latin}" flowering plant`,
+      `"${latin}" inflorescence`,
+      `${genus} flower photograph`
+    ];
+  }else{
+    queries=[
+      `"${latin}" seeds`,
+      `"${latin}" seed`,
+      `"${latin}" seed head`,
+      `"${latin}" seed pod`,
+      `${genus} seeds photograph`
+    ];
+  }
+
+  const blocked=ffxBlockedList(plant.id,type);
+
+  const seen={};
+  const results=[];
+
+  for(let qIndex=0;qIndex<queries.length;qIndex++){
     try{
+      const batch=await ffxCommonsQuery(queries[qIndex]);
 
-      var batch =
-        await ffxCommonsQuery(
-          queries[q]
-        );
+      for(let i=0;i<batch.length;i++){
+        const image=batch[i];
 
-      for(
-        var i=0;
-        i<batch.length;
-        i++
-      ){
+        if(!image.full)continue;
+        if(seen[image.full])continue;
+        if(blocked.indexOf(image.full)!==-1)continue;
+        if(ffxIsBadImage(image))continue;
 
-        var image = batch[i];
+        image.score=ffxScore(image,plant,type);
 
-        if(!image.full){
-          continue;
-        }
-
-        if(seen[image.full]){
-          continue;
-        }
-
-        if(
-          blocked.indexOf(
-            image.full
-          ) !== -1
-        ){
-          continue;
-        }
-
-        if(
-          ffxIsBadImage(image)
-        ){
-          continue;
-        }
-
-        image.score =
-          ffxScore(
-            image,
-            plant,
-            type
-          );
-
-        seen[image.full] = true;
-
+        seen[image.full]=true;
         results.push(image);
       }
-
     }catch(err){}
   }
 
-  results.sort(
-    function(a,b){
-      return b.score - a.score;
-    }
-  );
+  results.sort((a,b)=>b.score-a.score);
 
   return results.slice(0,6);
 }
 
-
-/* =========================================================
-   RESIZE OWN PHOTO
-   ========================================================= */
+/* =========================
+   הקטנת תמונה מהמכשיר
+   ========================= */
 
 function ffxResizeOwnPhoto(file){
+  return new Promise((resolve,reject)=>{
+    const reader=new FileReader();
 
-  return new Promise(
-    function(resolve,reject){
+    reader.onerror=reject;
 
-      var reader =
-        new FileReader();
+    reader.onload=function(event){
+      const img=new Image();
 
-      reader.onerror = reject;
+      img.onerror=reject;
 
-      reader.onload =
-        function(event){
+      img.onload=function(){
+        const maxSide=1200;
 
-          var img =
-            new Image();
+        let width=img.width;
+        let height=img.height;
 
-          img.onerror = reject;
+        if(width>maxSide||height>maxSide){
+          const ratio=Math.min(
+            maxSide/width,
+            maxSide/height
+          );
 
-          img.onload =
-            function(){
+          width=Math.round(width*ratio);
+          height=Math.round(height*ratio);
+        }
 
-              var maxSide = 1200;
+        const canvas=document.createElement("canvas");
 
-              var width =
-                img.width;
+        canvas.width=width;
+        canvas.height=height;
 
-              var height =
-                img.height;
+        const context=canvas.getContext("2d");
 
-              if(
-                width > maxSide ||
-                height > maxSide
-              ){
+        context.drawImage(
+          img,
+          0,
+          0,
+          width,
+          height
+        );
 
-                var ratio =
-                  Math.min(
-                    maxSide / width,
-                    maxSide / height
-                  );
+        resolve(
+          canvas.toDataURL(
+            "image/jpeg",
+            0.78
+          )
+        );
+      };
 
-                width =
-                  Math.round(
-                    width * ratio
-                  );
+      img.src=event.target.result;
+    };
 
-                height =
-                  Math.round(
-                    height * ratio
-                  );
-              }
-
-              var canvas =
-                document.createElement(
-                  "canvas"
-                );
-
-              canvas.width = width;
-              canvas.height = height;
-
-              var context =
-                canvas.getContext("2d");
-
-              context.drawImage(
-                img,
-                0,
-                0,
-                width,
-                height
-              );
-
-              resolve(
-                canvas.toDataURL(
-                  "image/jpeg",
-                  0.78
-                )
-              );
-            };
-
-          img.src =
-            event.target.result;
-        };
-
-      reader.readAsDataURL(file);
-    }
-  );
+    reader.readAsDataURL(file);
+  });
 }
 
-
-/* =========================================================
-   OWN PHOTO PICKER
-   ========================================================= */
+/* =========================
+   העלאת תמונה מהמכשיר
+   ========================= */
 
 async function ffxUploadOwn(plant,type){
-
   if(!ffxIsAdmin()){
     alert("יש להפעיל מצב מנהל");
     return;
   }
 
-  var input =
-    document.createElement(
-      "input"
-    );
+  const input=document.createElement("input");
 
-  input.type = "file";
-  input.accept = "image/*";
+  input.type="file";
+  input.accept="image/*";
 
-  input.onchange =
-    async function(){
+  input.onchange=async function(){
+    const file=input.files&&input.files[0];
 
-      var file =
-        input.files &&
-        input.files[0];
+    if(!file)return;
 
-      if(!file){
-        return;
+    try{
+      const box=document.getElementById("imgBox");
+
+      if(box){
+        box.innerHTML=
+          '<div class="ffx-status">'+
+          'מעבד ושומר את התמונה…'+
+          '</div>';
       }
 
-      try{
+      const dataUrl=await ffxResizeOwnPhoto(file);
 
-        var box =
-          document.getElementById(
-            "imgBox"
-          );
+      ffxSaveOwn(
+        plant.id,
+        type,
+        dataUrl
+      );
 
-        if(box){
-          box.innerHTML =
-            '<div class="ffx-status">' +
-            'מעבד ושומר את התמונה…' +
-            '</div>';
+      ffxSavePreferred(
+        plant.id,
+        type,
+        {
+          url:dataUrl,
+          full:dataUrl,
+          title:"תמונה שלך",
+          page:"",
+          license:"",
+          own:true
         }
+      );
 
-        var dataUrl =
-          await ffxResizeOwnPhoto(
-            file
-          );
-
-        ffxSaveOwn(
-          plant.id,
-          type,
-          dataUrl
-        );
-
-        ffxSavePreferred(
-          plant.id,
-          type,
-          {
-            url:dataUrl,
-            full:dataUrl,
-            title:"תמונה שלך",
-            page:"",
-            license:"",
-            own:true
-          }
-        );
-
-        showImage(
-          plant.id,
-          type
-        );
-
-      }catch(err){
-
-        alert(
-          "לא הצלחתי לשמור את התמונה. " +
-          "נסה תמונה קטנה יותר."
-        );
-      }
-    };
+      showImage(
+        plant.id,
+        type
+      );
+    }catch(err){
+      alert(
+        "לא הצלחתי לשמור את התמונה. "+
+        "נסה תמונה קטנה יותר."
+      );
+    }
+  };
 
   input.click();
 }
 
+/* =========================
+   כרטיס תמונה
+   ========================= */
 
-/* =========================================================
-   IMAGE CARD
-   ========================================================= */
+function ffxImageCard(image,index,admin){
+  const license=esc(image.license||"");
 
-function ffxImageCard(
-  image,
-  index,
-  admin
-){
-
-  var license =
-    esc(
-      image.license || ""
-    );
-
-  var source = "";
+  let source="";
 
   if(image.page){
-
-    source =
-      ' · <a href="' +
-      esc(image.page) +
-      '" target="_blank" ' +
-      'rel="noopener">מקור</a>';
+    source=
+      ' · <a href="'+
+      esc(image.page)+
+      '" target="_blank" rel="noopener">מקור</a>';
   }
 
-  var buttons = "";
+  let buttons="";
 
   if(admin){
+    buttons=
+      '<button '+
+      'type="button" '+
+      'class="ffx-card-button" '+
+      'data-ffx-pick="'+index+'">'+
+      '⭐ בחר כתמונה'+
+      '</button>'+
 
-    buttons =
-      '<button ' +
-      'type="button" ' +
-      'class="ffx-card-button" ' +
-      'data-ffx-pick="' +
-      index +
-      '">' +
-      '⭐ בחר כתמונה' +
-      '</button>' +
-
-      '<button ' +
-      'type="button" ' +
-      'class="ffx-card-button reject" ' +
-      'data-ffx-reject="' +
-      index +
-      '">' +
-      '🚫 לא נכונה' +
+      '<button '+
+      'type="button" '+
+      'class="ffx-card-button reject" '+
+      'data-ffx-reject="'+index+'">'+
+      '🚫 לא נכונה'+
       '</button>';
   }
 
-  return (
-    '<div class="ffx-image-card">' +
+  return(
+    '<div class="ffx-image-card">'+
 
-      '<img src="' +
-      esc(image.url) +
-      '" loading="lazy" ' +
-      'alt="תמונת צמח">' +
+      '<img src="'+
+      esc(image.url)+
+      '" loading="lazy" '+
+      'alt="תמונת צמח">'+
 
-      buttons +
+      buttons+
 
-      '<div class="ffx-source">' +
-      license +
-      source +
-      '</div>' +
+      '<div class="ffx-source">'+
+      license+
+      source+
+      '</div>'+
 
     '</div>'
   );
 }
 
+/* =========================
+   פתיחת גלריית תמונות
+   ========================= */
 
-/* =========================================================
-   FINAL SHOW IMAGE OVERRIDE
-   ========================================================= */
+async function showImage(id,type){
+  const plant=plants.find(item=>item.id===id);
 
-showImage =
-async function(id,type){
+  if(!plant)return;
 
-  var plant =
-    plants.find(
-      function(item){
-        return item.id === id;
-      }
-    );
+  const admin=ffxIsAdmin();
 
-  if(!plant){
-    return;
-  }
+  const own=ffxGetOwn(id,type);
+  const preferred=ffxGetPreferred(id,type);
 
-  var admin =
-    ffxIsAdmin();
-
-  var own =
-    ffxGetOwn(
-      id,
-      type
-    );
-
-  var preferred =
-    ffxGetPreferred(
-      id,
-      type
-    );
-
-  var box =
-    document.getElementById(
-      "imgBox"
-    );
-
-  var title =
-    document.getElementById(
-      "imgTitle"
-    );
-
-  var meta =
-    document.getElementById(
-      "imgMeta"
-    );
+  const box=document.getElementById("imgBox");
+  const title=document.getElementById("imgTitle");
+  const meta=document.getElementById("imgMeta");
 
   if(title){
-
-    title.textContent =
-      (
-        type === "flower"
-        ? "🌸 "
-        : "🌾 "
-      ) +
+    title.textContent=
+      (type==="flower"?"🌸 ":"🌾 ")+
       plant.name;
   }
 
   if(meta){
-    meta.innerHTML = "";
+    meta.innerHTML="";
   }
 
-  openModal(
-    document.getElementById(
-      "imgDlg"
-    )
-  );
+  openModal(document.getElementById("imgDlg"));
 
-  var html =
-    '<div style="width:100%">';
+  let topHtml="";
+
+  if(own){
+    topHtml+=
+      '<div class="ffx-image-tools">'+
+
+        '<div class="ffx-section-title">'+
+        'התמונה שהעלית'+
+        '</div>'+
+
+        '<img class="ffx-own-photo" src="'+
+        esc(own)+
+        '" alt="'+
+        esc(plant.name)+
+        '">'+
+
+        (
+          admin
+            ?
+              '<div class="ffx-tools-row">'+
+                '<button type="button" class="ffx-tool-btn danger" id="ffxDeleteOwn">'+
+                  '🗑 מחק תמונה שהעליתי'+
+                '</button>'+
+              '</div>'
+            :""
+        )+
+
+      '</div>';
+  }
+
+  if(preferred&&!preferred.own){
+    topHtml+=
+      '<div class="ffx-image-tools">'+
+
+        '<div class="ffx-section-title">'+
+        '⭐ התמונה המועדפת'+
+        '</div>'+
+
+        '<img class="ffx-own-photo" src="'+
+        esc(preferred.url)+
+        '" alt="'+
+        esc(plant.name)+
+        '">'+
+
+        (
+          admin
+            ?
+              '<div class="ffx-tools-row">'+
+                '<button type="button" class="ffx-tool-btn danger" id="ffxRemovePreferred">'+
+                  'הסר בחירה מועדפת'+
+                '</button>'+
+              '</div>'
+            :""
+        )+
+
+      '</div>';
+  }
 
   if(admin){
+    topHtml+=
+      '<div class="ffx-image-tools">'+
 
-    html +=
-      '<div class="ffx-tools-row">' +
+        '<div class="ffx-tools-row">'+
+          '<button type="button" class="ffx-tool-btn primary" id="ffxUploadOwn">'+
+            '📷 העלה תמונה מהמכשיר'+
+          '</button>'+
+        '</div>'+
 
-      '<button ' +
-      'type="button" ' +
-      'class="ffx-tool-btn primary" ' +
-      'id="ffxUploadOwn">' +
-      '📷 הוסף תמונה שלי' +
-      '</button>';
-
-    if(own){
-
-      html +=
-        '<button ' +
-        'type="button" ' +
-        'class="ffx-tool-btn danger" ' +
-        'id="ffxDeleteOwn">' +
-        '🗑️ מחק תמונה שלי' +
-        '</button>';
-    }
-
-    html += '</div>';
+      '</div>';
   }
 
-  if(preferred){
-
-    html +=
-      '<div class="ffx-section-title">' +
-      '⭐ תמונה מועדפת' +
-      '</div>' +
-
-      '<img ' +
-      'class="ffx-own-photo" ' +
-      'src="' +
-      esc(preferred.url) +
-      '" alt="' +
-      esc(plant.name) +
-      '">';
-
-    if(admin){
-
-      html +=
-        '<button ' +
-        'type="button" ' +
-        'class="ffx-tool-btn danger" ' +
-        'id="ffxRemovePreferred">' +
-        'הסר בחירה מועדפת' +
-        '</button>';
-    }
+  if(box){
+    box.innerHTML=
+      '<div style="width:100%">'+
+      topHtml+
+      '<div class="ffx-status">מחפש תמונות מתאימות…</div>'+
+      '</div>';
   }
 
-  html +=
-    '<div class="ffx-section-title">' +
-    (
-      type === "flower"
-      ? "תמונות פרח מוצעות"
-      : "תמונות זרעים מוצעות"
-    ) +
-    '</div>' +
-
-    '<div ' +
-    'id="ffxSearchResults" ' +
-    'class="ffx-status">' +
-    'מחפש תמונות מדויקות…' +
-    '</div>' +
-
-    '</div>';
-
-  box.innerHTML = html;
-
-
-  /* Upload own photo */
-
-  var uploadButton =
-    document.getElementById(
-      "ffxUploadOwn"
-    );
+  const uploadButton=document.getElementById("ffxUploadOwn");
 
   if(uploadButton){
-
-    uploadButton.onclick =
-      function(){
-
-        ffxUploadOwn(
-          plant,
-          type
-        );
-      };
+    uploadButton.onclick=()=>{
+      ffxUploadOwn(plant,type);
+    };
   }
 
+  const deleteOwnButton=document.getElementById("ffxDeleteOwn");
 
-  /* Delete own photo */
+  if(deleteOwnButton){
+    deleteOwnButton.onclick=()=>{
+      if(confirm("למחוק את התמונה שהעלית?")){
+        ffxDeleteOwn(id,type);
 
-  var deleteOwn =
-    document.getElementById(
-      "ffxDeleteOwn"
-    );
+        const pref=ffxGetPreferred(id,type);
 
-  if(deleteOwn){
-
-    deleteOwn.onclick =
-      function(){
-
-        if(
-          !confirm(
-            "למחוק את התמונה שהעלית?"
-          )
-        ){
-          return;
+        if(pref&&pref.own){
+          ffxRemovePreferred(id,type);
         }
 
-        ffxDeleteOwn(
-          id,
-          type
-        );
-
-        var currentPreferred =
-          ffxGetPreferred(
-            id,
-            type
-          );
-
-        if(
-          currentPreferred &&
-          currentPreferred.own
-        ){
-          ffxRemovePreferred(
-            id,
-            type
-          );
-        }
-
-        showImage(
-          id,
-          type
-        );
-      };
+        showImage(id,type);
+      }
+    };
   }
 
+  const removePreferredButton=
+    document.getElementById("ffxRemovePreferred");
 
-  /* Remove preferred */
-
-  var removePreferred =
-    document.getElementById(
-      "ffxRemovePreferred"
-    );
-
-  if(removePreferred){
-
-    removePreferred.onclick =
-      function(){
-
-        if(
-          !confirm(
-            "להסיר את התמונה המועדפת?"
-          )
-        ){
-          return;
-        }
-
-        ffxRemovePreferred(
-          id,
-          type
-        );
-
-        showImage(
-          id,
-          type
-        );
-      };
+  if(removePreferredButton){
+    removePreferredButton.onclick=()=>{
+      ffxRemovePreferred(id,type);
+      showImage(id,type);
+    };
   }
-
-
-  /* Search Wikimedia */
 
   try{
-
-    var images =
-      await ffxSmartSearch(
-        plant,
-        type
-      );
-
-    var resultsBox =
-      document.getElementById(
-        "ffxSearchResults"
-      );
-
-    if(!resultsBox){
-      return;
-    }
+    const images=await ffxSmartSearch(plant,type);
 
     if(!images.length){
-
-      resultsBox.innerHTML =
-        "לא נמצאו כרגע תמונות " +
-        "מתאימות מספיק.";
-
-      return;
+      throw new Error("no images");
     }
 
-    resultsBox.className =
-      "ffx-gallery";
+    const galleryHtml=
+      '<div class="ffx-section-title">'+
+      'תמונות מוצעות'+
+      '</div>'+
 
-    resultsBox.innerHTML =
-      images
-        .map(
-          function(image,index){
-
-            return ffxImageCard(
-              image,
-              index,
-              admin
-            );
-          }
+      '<div class="ffx-gallery">'+
+      images.map((image,index)=>
+        ffxImageCard(
+          image,
+          index,
+          admin
         )
-        .join("");
+      ).join("")+
+      '</div>';
 
+    if(box){
+      box.innerHTML=
+        '<div style="width:100%">'+
+        topHtml+
+        galleryHtml+
+        '</div>';
+    }
 
-    /* Preferred buttons */
+    const uploadButton2=document.getElementById("ffxUploadOwn");
 
-    resultsBox
-      .querySelectorAll(
-        "[data-ffx-pick]"
-      )
-      .forEach(
-        function(button){
+    if(uploadButton2){
+      uploadButton2.onclick=()=>{
+        ffxUploadOwn(plant,type);
+      };
+    }
 
-          button.onclick =
-            function(){
+    const deleteOwnButton2=document.getElementById("ffxDeleteOwn");
 
-              var index =
-                Number(
-                  button.getAttribute(
-                    "data-ffx-pick"
-                  )
-                );
+    if(deleteOwnButton2){
+      deleteOwnButton2.onclick=()=>{
+        if(confirm("למחוק את התמונה שהעלית?")){
+          ffxDeleteOwn(id,type);
 
-              var image =
-                images[index];
+          const pref=ffxGetPreferred(id,type);
 
-              if(!image){
-                return;
-              }
+          if(pref&&pref.own){
+            ffxRemovePreferred(id,type);
+          }
 
-              ffxSavePreferred(
-                id,
-                type,
-                image
-              );
-
-              showImage(
-                id,
-                type
-              );
-            };
+          showImage(id,type);
         }
-      );
+      };
+    }
 
+    const removePreferredButton2=
+      document.getElementById("ffxRemovePreferred");
 
-    /* Reject buttons */
+    if(removePreferredButton2){
+      removePreferredButton2.onclick=()=>{
+        ffxRemovePreferred(id,type);
+        showImage(id,type);
+      };
+    }
 
-    resultsBox
-      .querySelectorAll(
-        "[data-ffx-reject]"
-      )
-      .forEach(
-        function(button){
+    box
+      .querySelectorAll("[data-ffx-pick]")
+      .forEach(button=>{
+        button.onclick=function(){
+          const image=
+            images[
+              Number(
+                this.dataset.ffxPick
+              )
+            ];
 
-          button.onclick =
-            function(){
+          if(!image)return;
 
-              var index =
-                Number(
-                  button.getAttribute(
-                    "data-ffx-reject"
-                  )
-                );
+          ffxSavePreferred(
+            id,
+            type,
+            image
+          );
 
-              var image =
-                images[index];
+          this.textContent="★ נשמרה";
 
-              if(!image){
-                return;
-              }
+          setTimeout(()=>{
+            showImage(id,type);
+          },250);
+        };
+      });
 
-              if(
-                !confirm(
-                  "לסמן את התמונה " +
-                  "כלא נכונה?\n" +
-                  "היא לא תוצג שוב " +
-                  "עבור הפרח הזה."
-                )
-              ){
-                return;
-              }
+    box
+      .querySelectorAll("[data-ffx-reject]")
+      .forEach(button=>{
+        button.onclick=function(){
+          const image=
+            images[
+              Number(
+                this.dataset.ffxReject
+              )
+            ];
 
-              ffxBlock(
-                id,
-                type,
-                image.full
+          if(!image)return;
+
+          if(
+            confirm(
+              "לסמן את התמונה כלא רלוונטית? "+
+              "היא לא תוצג שוב עבור הצמח הזה."
+            )
+          ){
+            ffxBlock(
+              id,
+              type,
+              image.full
+            );
+
+            const card=
+              this.closest(
+                ".ffx-image-card"
               );
 
-              showImage(
-                id,
-                type
-              );
-            };
-        }
-      );
+            if(card){
+              card.remove();
+            }
+          }
+        };
+      });
 
   }catch(err){
-
-    var resultsBox =
-      document.getElementById(
-        "ffxSearchResults"
+    const manualSearch=
+      "https://commons.wikimedia.org/wiki/Special:MediaSearch"+
+      "?type=image&search="+
+      encodeURIComponent(
+        (plant.latin||plant.name)+
+        (type==="flower"?" flower":" seed")
       );
 
-    if(resultsBox){
+    if(box){
+      box.innerHTML=
+        '<div style="width:100%">'+
+        topHtml+
+        '<div class="ffx-status">'+
+          'לא הצלחתי למצוא כרגע תמונות מתאימות.'+
+          '<br><br>'+
+          '<a href="'+
+          manualSearch+
+          '" target="_blank" rel="noopener">'+
+          'חיפוש ידני ב-Wikimedia Commons'+
+          '</a>'+
+        '</div>'+
+        '</div>';
+    }
 
-      resultsBox.innerHTML =
-        "לא הצלחתי להתחבר כרגע " +
-        "למאגר התמונות.";
+    const uploadButton3=document.getElementById("ffxUploadOwn");
+
+    if(uploadButton3){
+      uploadButton3.onclick=()=>{
+        ffxUploadOwn(plant,type);
+      };
     }
   }
-};
+}
 
-
-/* =========================================================
-   START
-   ========================================================= */
+/* =========================
+   הפעלה
+   ========================= */
 
 ffxCreateAdminButton();
+
+render();
+renderNow();
 ffxApplyAdminUI();
 
-})();
-</script></body></html>
+</script>
+</body>
+</html>
