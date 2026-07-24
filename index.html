@@ -359,4 +359,1487 @@ showImage=async function(id,type){
     }
   }
 };
+</script><style>
+/* =========================================================
+   FLOWER FIELD FINAL IMAGE + ADMIN PATCH
+   ========================================================= */
+
+.ffx-admin-toggle{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  margin-top:10px;
+  border:1px solid #d8d3c5;
+  border-radius:999px;
+  padding:7px 12px;
+  min-height:38px;
+  background:#fff;
+  color:#263026;
+  font-size:12px;
+}
+
+.ffx-admin-toggle.on{
+  background:#426b4b;
+  border-color:#426b4b;
+  color:#fff;
+}
+
+.ffx-image-tools{
+  width:100%;
+  margin-bottom:12px;
+}
+
+.ffx-own-photo{
+  width:100%;
+  max-height:340px;
+  object-fit:contain;
+  display:block;
+  border-radius:14px;
+  background:#f4f1e8;
+}
+
+.ffx-tools-row{
+  display:flex;
+  gap:7px;
+  margin-top:8px;
+  flex-wrap:wrap;
+}
+
+.ffx-tool-btn{
+  flex:1 1 140px;
+  border:1px solid #d8d3c5;
+  border-radius:11px;
+  padding:9px;
+  min-height:44px;
+  background:#fff;
+  color:#263026;
+}
+
+.ffx-tool-btn.primary{
+  background:#426b4b;
+  border-color:#426b4b;
+  color:#fff;
+}
+
+.ffx-tool-btn.danger{
+  color:#8f3f3f;
+  background:#fff;
+}
+
+.ffx-section-title{
+  margin:12px 0 8px;
+  font-size:13px;
+  font-weight:700;
+  color:#426b4b;
+}
+
+.ffx-gallery{
+  width:100%;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:9px;
+}
+
+.ffx-image-card{
+  min-width:0;
+  border:1px solid #ddd8ca;
+  border-radius:14px;
+  padding:7px;
+  background:#fff;
+}
+
+.ffx-image-card img{
+  width:100%;
+  height:175px;
+  object-fit:contain;
+  display:block;
+  border-radius:10px;
+  background:#f5f2e9;
+}
+
+.ffx-card-button{
+  width:100%;
+  border:0;
+  border-radius:10px;
+  padding:8px 5px;
+  margin-top:6px;
+  min-height:42px;
+  background:#426b4b;
+  color:#fff;
+  font-size:13px;
+}
+
+.ffx-card-button.reject{
+  background:#fff;
+  color:#8f3f3f;
+  border:1px solid #ddd8ca;
+}
+
+.ffx-source{
+  margin-top:6px;
+  font-size:10px;
+  line-height:1.3;
+  color:#657064;
+  overflow-wrap:anywhere;
+}
+
+.ffx-source a{
+  color:#426b4b;
+}
+
+.ffx-status{
+  width:100%;
+  padding:24px 8px;
+  text-align:center;
+  color:#657064;
+}
+
+@media(max-width:719px){
+  .ffx-gallery{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .ffx-image-card img{
+    height:150px;
+  }
+
+  .ffx-card-button{
+    font-size:12px;
+  }
+}
+</style>
+
+<script>
+(function(){
+
+"use strict";
+
+/* =========================================================
+   SETTINGS
+   ========================================================= */
+
+var FFX_ADMIN_PIN = "106106";
+
+var FFX_ADMIN_KEY = "flowerFieldAdminSession_v1";
+var FFX_PREF_KEY = "flowerFieldPreferredImages_v4";
+var FFX_BLOCK_KEY = "flowerFieldBlockedImages_v4";
+var FFX_OWN_KEY = "flowerFieldOwnImages_v4";
+
+
+/* =========================================================
+   SAFE STORAGE
+   ========================================================= */
+
+function ffxRead(key){
+  try{
+    return JSON.parse(localStorage.getItem(key) || "{}");
+  }catch(err){
+    return {};
+  }
+}
+
+function ffxWrite(key,value){
+  try{
+    localStorage.setItem(key,JSON.stringify(value));
+    return true;
+  }catch(err){
+    return false;
+  }
+}
+
+function ffxImageKey(id,type){
+  return String(id) + "__" + String(type);
+}
+
+
+/* =========================================================
+   ADMIN MODE
+   ========================================================= */
+
+function ffxIsAdmin(){
+  try{
+    return sessionStorage.getItem(FFX_ADMIN_KEY) === "yes";
+  }catch(err){
+    return false;
+  }
+}
+
+function ffxSetAdmin(value){
+  try{
+    if(value){
+      sessionStorage.setItem(FFX_ADMIN_KEY,"yes");
+    }else{
+      sessionStorage.removeItem(FFX_ADMIN_KEY);
+    }
+  }catch(err){}
+}
+
+function ffxApplyAdminUI(){
+
+  var admin = ffxIsAdmin();
+
+  var addButton = document.getElementById("addBtn");
+
+  if(addButton){
+    addButton.style.display = admin ? "" : "none";
+  }
+
+  document
+    .querySelectorAll("[data-edit]")
+    .forEach(function(button){
+      button.style.display = admin ? "" : "none";
+    });
+
+  var toggle = document.getElementById("ffxAdminToggle");
+
+  if(toggle){
+    if(admin){
+      toggle.textContent = "🔓 מצב מנהל פעיל";
+      toggle.classList.add("on");
+    }else{
+      toggle.textContent = "🔒 מצב צפייה";
+      toggle.classList.remove("on");
+    }
+  }
+}
+
+function ffxToggleAdmin(){
+
+  if(ffxIsAdmin()){
+
+    ffxSetAdmin(false);
+    ffxApplyAdminUI();
+
+    alert("יצאת ממצב מנהל");
+    return;
+  }
+
+  var entered = prompt("הזן קוד מנהל:");
+
+  if(entered === null){
+    return;
+  }
+
+  if(entered === FFX_ADMIN_PIN){
+
+    ffxSetAdmin(true);
+    ffxApplyAdminUI();
+
+    alert("מצב מנהל פעיל");
+
+  }else{
+
+    alert("קוד שגוי");
+
+  }
+}
+
+function ffxCreateAdminButton(){
+
+  if(document.getElementById("ffxAdminToggle")){
+    return;
+  }
+
+  var header = document.querySelector("header");
+
+  if(!header){
+    return;
+  }
+
+  var button = document.createElement("button");
+
+  button.id = "ffxAdminToggle";
+  button.type = "button";
+  button.className = "ffx-admin-toggle";
+  button.onclick = ffxToggleAdmin;
+
+  header.appendChild(button);
+
+  ffxApplyAdminUI();
+}
+
+
+/* =========================================================
+   PROTECT EXISTING EDITING
+   ========================================================= */
+
+if(typeof openEdit === "function"){
+
+  var ffxOriginalOpenEdit = openEdit;
+
+  openEdit = function(id){
+
+    if(!ffxIsAdmin()){
+      alert("כדי להוסיף או לערוך יש להפעיל מצב מנהל");
+      return;
+    }
+
+    return ffxOriginalOpenEdit(id);
+  };
+}
+
+if(typeof render === "function"){
+
+  var ffxOriginalRender = render;
+
+  render = function(){
+
+    var result =
+      ffxOriginalRender.apply(this,arguments);
+
+    setTimeout(ffxApplyAdminUI,0);
+
+    return result;
+  };
+}
+
+
+/* =========================================================
+   PREFERRED / BLOCKED / OWN IMAGES
+   ========================================================= */
+
+function ffxGetPreferred(id,type){
+
+  var all = ffxRead(FFX_PREF_KEY);
+
+  return all[ffxImageKey(id,type)] || null;
+}
+
+function ffxSavePreferred(id,type,image){
+
+  var all = ffxRead(FFX_PREF_KEY);
+
+  all[ffxImageKey(id,type)] = image;
+
+  ffxWrite(FFX_PREF_KEY,all);
+}
+
+function ffxRemovePreferred(id,type){
+
+  var all = ffxRead(FFX_PREF_KEY);
+
+  delete all[ffxImageKey(id,type)];
+
+  ffxWrite(FFX_PREF_KEY,all);
+}
+
+
+function ffxBlockedList(id,type){
+
+  var all = ffxRead(FFX_BLOCK_KEY);
+
+  var list = all[ffxImageKey(id,type)];
+
+  return Array.isArray(list) ? list : [];
+}
+
+function ffxBlock(id,type,url){
+
+  if(!url){
+    return;
+  }
+
+  var all = ffxRead(FFX_BLOCK_KEY);
+  var key = ffxImageKey(id,type);
+
+  if(!Array.isArray(all[key])){
+    all[key] = [];
+  }
+
+  if(all[key].indexOf(url) === -1){
+    all[key].push(url);
+  }
+
+  ffxWrite(FFX_BLOCK_KEY,all);
+
+  var preferred = ffxGetPreferred(id,type);
+
+  if(
+    preferred &&
+    preferred.full === url
+  ){
+    ffxRemovePreferred(id,type);
+  }
+}
+
+
+function ffxGetOwn(id,type){
+
+  var all = ffxRead(FFX_OWN_KEY);
+
+  return all[ffxImageKey(id,type)] || null;
+}
+
+function ffxSaveOwn(id,type,dataUrl){
+
+  var all = ffxRead(FFX_OWN_KEY);
+
+  all[ffxImageKey(id,type)] = dataUrl;
+
+  if(!ffxWrite(FFX_OWN_KEY,all)){
+    throw new Error("storage");
+  }
+}
+
+function ffxDeleteOwn(id,type){
+
+  var all = ffxRead(FFX_OWN_KEY);
+
+  delete all[ffxImageKey(id,type)];
+
+  ffxWrite(FFX_OWN_KEY,all);
+}
+
+
+/* =========================================================
+   CLEAN LATIN NAME
+   ========================================================= */
+
+function ffxLatinName(plant){
+
+  var text =
+    String(
+      plant.latin ||
+      plant.name ||
+      ""
+    ).trim();
+
+  if(text.indexOf("/") !== -1){
+    text = text.split("/")[0].trim();
+  }
+
+  text =
+    text.replace(/\([^)]*\)/g," ")
+        .replace(/\s+/g," ")
+        .trim();
+
+  return text;
+}
+
+function ffxGenus(plant){
+
+  var latin = ffxLatinName(plant);
+
+  return latin.split(/\s+/)[0] || latin;
+}
+
+
+/* =========================================================
+   COMMONS RESULT FILTER
+   ========================================================= */
+
+function ffxPlainText(value){
+
+  return String(value || "")
+    .replace(/<[^>]+>/g," ")
+    .replace(/&nbsp;/gi," ")
+    .replace(/\s+/g," ")
+    .trim();
+}
+
+function ffxIsBadImage(image){
+
+  var text = (
+    String(image.title || "") + " " +
+    String(image.description || "")
+  ).toLowerCase();
+
+  var badWords = [
+    ".pdf",
+    ".djvu",
+    ".tif",
+    ".tiff",
+    "bulletin",
+    "catalogue",
+    "catalog ",
+    "book ",
+    "book-",
+    "journal",
+    "magazine",
+    "newspaper",
+    "report ",
+    "poster",
+    "manuscript",
+    "scan ",
+    "scanned",
+    "page ",
+    "page-",
+    "title page",
+    "book cover",
+    "cover page",
+    "document",
+    "biodiversity heritage",
+    "usda bulletin",
+    "yearbook",
+    "proceedings",
+    "archive.org",
+    "herbarium sheet"
+  ];
+
+  for(var i=0;i<badWords.length;i++){
+
+    if(text.indexOf(badWords[i]) !== -1){
+      return true;
+    }
+  }
+
+  if(
+    image.mime &&
+    image.mime.indexOf("image/") !== 0
+  ){
+    return true;
+  }
+
+  return false;
+}
+
+
+/* =========================================================
+   IMAGE SCORE
+   ========================================================= */
+
+function ffxScore(image,plant,type){
+
+  var text = (
+    String(image.title || "") + " " +
+    String(image.description || "")
+  ).toLowerCase();
+
+  var latin = ffxLatinName(plant).toLowerCase();
+  var genus = ffxGenus(plant).toLowerCase();
+
+  let score = 0;
+
+  if(genus && text.indexOf(genus) !== -1){
+    score += 12;
+  }
+
+  if(
+    latin &&
+    text.indexOf(latin) !== -1
+  ){
+    score += 15;
+  }
+
+  if(type === "flower"){
+
+    if(
+      /flower|flowers|flowering|blossom|bloom|inflorescence/.test(text)
+    ){
+      score += 12;
+    }
+
+    if(
+      /plant|garden|field|stem|foliage/.test(text)
+    ){
+      score += 3;
+    }
+
+    if(
+      /seed|seeds|fruit|pod/.test(text)
+    ){
+      score -= 3;
+    }
+
+  }else{
+
+    if(
+      /\bseed\b|\bseeds\b/.test(text)
+    ){
+      score += 16;
+    }
+
+    if(
+      /seedhead|seed head|seedpod|seed pod|capsule|achene|grain/.test(text)
+    ){
+      score += 10;
+    }
+
+    if(
+      /fruit|fruits|pod|pods/.test(text)
+    ){
+      score += 5;
+    }
+
+    if(
+      /flower|blossom/.test(text)
+    ){
+      score -= 5;
+    }
+  }
+
+  if(
+    /photograph|photo|jpg|jpeg/.test(text)
+  ){
+    score += 3;
+  }
+
+  if(
+    /illustration|drawing|plate|painting/.test(text)
+  ){
+    score -= 4;
+  }
+
+  return score;
+}
+
+
+/* =========================================================
+   WIKIMEDIA COMMONS SEARCH
+   ========================================================= */
+
+async function ffxCommonsQuery(query){
+
+  var url =
+    "https://commons.wikimedia.org/w/api.php" +
+    "?origin=*" +
+    "&action=query" +
+    "&format=json" +
+    "&generator=search" +
+    "&gsrnamespace=6" +
+    "&gsrlimit=20" +
+    "&gsrsearch=" +
+      encodeURIComponent(query) +
+    "&prop=imageinfo" +
+    "&iiprop=url|mime|extmetadata" +
+    "&iiurlwidth=900";
+
+  var response = await fetch(url);
+
+  if(!response.ok){
+    throw new Error("network");
+  }
+
+  var data = await response.json();
+
+  var pages = Object.values(
+    data.query &&
+    data.query.pages
+      ? data.query.pages
+      : {}
+  );
+
+  return pages
+    .filter(function(page){
+
+      return (
+        page.imageinfo &&
+        page.imageinfo[0] &&
+        page.imageinfo[0].thumburl
+      );
+    })
+    .map(function(page){
+
+      var info = page.imageinfo[0];
+
+      var meta =
+        info.extmetadata || {};
+
+      return {
+
+        url:
+          info.thumburl,
+
+        full:
+          info.url ||
+          info.thumburl,
+
+        title:
+          page.title || "",
+
+        mime:
+          info.mime || "",
+
+        page:
+          info.descriptionurl || "",
+
+        license:
+          meta.LicenseShortName &&
+          meta.LicenseShortName.value
+            ? ffxPlainText(
+                meta.LicenseShortName.value
+              )
+            : "",
+
+        description:
+          meta.ImageDescription &&
+          meta.ImageDescription.value
+            ? ffxPlainText(
+                meta.ImageDescription.value
+              )
+            : "",
+
+        own:false
+      };
+    });
+}
+
+
+/* =========================================================
+   SMART MULTI-QUERY SEARCH
+   ========================================================= */
+
+async function ffxSmartSearch(plant,type){
+
+  var latin = ffxLatinName(plant);
+  var genus = ffxGenus(plant);
+
+  var queries;
+
+  if(type === "flower"){
+
+    queries = [
+      '"' + latin + '" flower',
+      '"' + latin + '" flowering plant',
+      '"' + latin + '" inflorescence',
+      genus + " flower photograph"
+    ];
+
+  }else{
+
+    queries = [
+      '"' + latin + '" seeds',
+      '"' + latin + '" seed',
+      '"' + latin + '" seed head',
+      '"' + latin + '" seed pod',
+      genus + " seeds photograph"
+    ];
+  }
+
+  var blocked =
+    ffxBlockedList(
+      plant.id,
+      type
+    );
+
+  var seen = {};
+  var results = [];
+
+  for(
+    var q=0;
+    q<queries.length;
+    q++
+  ){
+
+    try{
+
+      var batch =
+        await ffxCommonsQuery(
+          queries[q]
+        );
+
+      for(
+        var i=0;
+        i<batch.length;
+        i++
+      ){
+
+        var image = batch[i];
+
+        if(!image.full){
+          continue;
+        }
+
+        if(seen[image.full]){
+          continue;
+        }
+
+        if(
+          blocked.indexOf(
+            image.full
+          ) !== -1
+        ){
+          continue;
+        }
+
+        if(
+          ffxIsBadImage(image)
+        ){
+          continue;
+        }
+
+        image.score =
+          ffxScore(
+            image,
+            plant,
+            type
+          );
+
+        seen[image.full] = true;
+
+        results.push(image);
+      }
+
+    }catch(err){}
+  }
+
+  results.sort(
+    function(a,b){
+      return b.score - a.score;
+    }
+  );
+
+  return results.slice(0,6);
+}
+
+
+/* =========================================================
+   RESIZE OWN PHOTO
+   ========================================================= */
+
+function ffxResizeOwnPhoto(file){
+
+  return new Promise(
+    function(resolve,reject){
+
+      var reader =
+        new FileReader();
+
+      reader.onerror = reject;
+
+      reader.onload =
+        function(event){
+
+          var img =
+            new Image();
+
+          img.onerror = reject;
+
+          img.onload =
+            function(){
+
+              var maxSide = 1200;
+
+              var width =
+                img.width;
+
+              var height =
+                img.height;
+
+              if(
+                width > maxSide ||
+                height > maxSide
+              ){
+
+                var ratio =
+                  Math.min(
+                    maxSide / width,
+                    maxSide / height
+                  );
+
+                width =
+                  Math.round(
+                    width * ratio
+                  );
+
+                height =
+                  Math.round(
+                    height * ratio
+                  );
+              }
+
+              var canvas =
+                document.createElement(
+                  "canvas"
+                );
+
+              canvas.width = width;
+              canvas.height = height;
+
+              var context =
+                canvas.getContext("2d");
+
+              context.drawImage(
+                img,
+                0,
+                0,
+                width,
+                height
+              );
+
+              resolve(
+                canvas.toDataURL(
+                  "image/jpeg",
+                  0.78
+                )
+              );
+            };
+
+          img.src =
+            event.target.result;
+        };
+
+      reader.readAsDataURL(file);
+    }
+  );
+}
+
+
+/* =========================================================
+   OWN PHOTO PICKER
+   ========================================================= */
+
+async function ffxUploadOwn(plant,type){
+
+  if(!ffxIsAdmin()){
+    alert("יש להפעיל מצב מנהל");
+    return;
+  }
+
+  var input =
+    document.createElement(
+      "input"
+    );
+
+  input.type = "file";
+  input.accept = "image/*";
+
+  input.onchange =
+    async function(){
+
+      var file =
+        input.files &&
+        input.files[0];
+
+      if(!file){
+        return;
+      }
+
+      try{
+
+        var box =
+          document.getElementById(
+            "imgBox"
+          );
+
+        if(box){
+          box.innerHTML =
+            '<div class="ffx-status">' +
+            'מעבד ושומר את התמונה…' +
+            '</div>';
+        }
+
+        var dataUrl =
+          await ffxResizeOwnPhoto(
+            file
+          );
+
+        ffxSaveOwn(
+          plant.id,
+          type,
+          dataUrl
+        );
+
+        ffxSavePreferred(
+          plant.id,
+          type,
+          {
+            url:dataUrl,
+            full:dataUrl,
+            title:"תמונה שלך",
+            page:"",
+            license:"",
+            own:true
+          }
+        );
+
+        showImage(
+          plant.id,
+          type
+        );
+
+      }catch(err){
+
+        alert(
+          "לא הצלחתי לשמור את התמונה. " +
+          "נסה תמונה קטנה יותר."
+        );
+      }
+    };
+
+  input.click();
+}
+
+
+/* =========================================================
+   IMAGE CARD
+   ========================================================= */
+
+function ffxImageCard(
+  image,
+  index,
+  admin
+){
+
+  var license =
+    esc(
+      image.license || ""
+    );
+
+  var source = "";
+
+  if(image.page){
+
+    source =
+      ' · <a href="' +
+      esc(image.page) +
+      '" target="_blank" ' +
+      'rel="noopener">מקור</a>';
+  }
+
+  var buttons = "";
+
+  if(admin){
+
+    buttons =
+      '<button ' +
+      'type="button" ' +
+      'class="ffx-card-button" ' +
+      'data-ffx-pick="' +
+      index +
+      '">' +
+      '⭐ בחר כתמונה' +
+      '</button>' +
+
+      '<button ' +
+      'type="button" ' +
+      'class="ffx-card-button reject" ' +
+      'data-ffx-reject="' +
+      index +
+      '">' +
+      '🚫 לא נכונה' +
+      '</button>';
+  }
+
+  return (
+    '<div class="ffx-image-card">' +
+
+      '<img src="' +
+      esc(image.url) +
+      '" loading="lazy" ' +
+      'alt="תמונת צמח">' +
+
+      buttons +
+
+      '<div class="ffx-source">' +
+      license +
+      source +
+      '</div>' +
+
+    '</div>'
+  );
+}
+
+
+/* =========================================================
+   FINAL SHOW IMAGE OVERRIDE
+   ========================================================= */
+
+showImage =
+async function(id,type){
+
+  var plant =
+    plants.find(
+      function(item){
+        return item.id === id;
+      }
+    );
+
+  if(!plant){
+    return;
+  }
+
+  var admin =
+    ffxIsAdmin();
+
+  var own =
+    ffxGetOwn(
+      id,
+      type
+    );
+
+  var preferred =
+    ffxGetPreferred(
+      id,
+      type
+    );
+
+  var box =
+    document.getElementById(
+      "imgBox"
+    );
+
+  var title =
+    document.getElementById(
+      "imgTitle"
+    );
+
+  var meta =
+    document.getElementById(
+      "imgMeta"
+    );
+
+  if(title){
+
+    title.textContent =
+      (
+        type === "flower"
+        ? "🌸 "
+        : "🌾 "
+      ) +
+      plant.name;
+  }
+
+  if(meta){
+    meta.innerHTML = "";
+  }
+
+  openModal(
+    document.getElementById(
+      "imgDlg"
+    )
+  );
+
+  var html =
+    '<div style="width:100%">';
+
+  if(admin){
+
+    html +=
+      '<div class="ffx-tools-row">' +
+
+      '<button ' +
+      'type="button" ' +
+      'class="ffx-tool-btn primary" ' +
+      'id="ffxUploadOwn">' +
+      '📷 הוסף תמונה שלי' +
+      '</button>';
+
+    if(own){
+
+      html +=
+        '<button ' +
+        'type="button" ' +
+        'class="ffx-tool-btn danger" ' +
+        'id="ffxDeleteOwn">' +
+        '🗑️ מחק תמונה שלי' +
+        '</button>';
+    }
+
+    html += '</div>';
+  }
+
+  if(preferred){
+
+    html +=
+      '<div class="ffx-section-title">' +
+      '⭐ תמונה מועדפת' +
+      '</div>' +
+
+      '<img ' +
+      'class="ffx-own-photo" ' +
+      'src="' +
+      esc(preferred.url) +
+      '" alt="' +
+      esc(plant.name) +
+      '">';
+
+    if(admin){
+
+      html +=
+        '<button ' +
+        'type="button" ' +
+        'class="ffx-tool-btn danger" ' +
+        'id="ffxRemovePreferred">' +
+        'הסר בחירה מועדפת' +
+        '</button>';
+    }
+  }
+
+  html +=
+    '<div class="ffx-section-title">' +
+    (
+      type === "flower"
+      ? "תמונות פרח מוצעות"
+      : "תמונות זרעים מוצעות"
+    ) +
+    '</div>' +
+
+    '<div ' +
+    'id="ffxSearchResults" ' +
+    'class="ffx-status">' +
+    'מחפש תמונות מדויקות…' +
+    '</div>' +
+
+    '</div>';
+
+  box.innerHTML = html;
+
+
+  /* Upload own photo */
+
+  var uploadButton =
+    document.getElementById(
+      "ffxUploadOwn"
+    );
+
+  if(uploadButton){
+
+    uploadButton.onclick =
+      function(){
+
+        ffxUploadOwn(
+          plant,
+          type
+        );
+      };
+  }
+
+
+  /* Delete own photo */
+
+  var deleteOwn =
+    document.getElementById(
+      "ffxDeleteOwn"
+    );
+
+  if(deleteOwn){
+
+    deleteOwn.onclick =
+      function(){
+
+        if(
+          !confirm(
+            "למחוק את התמונה שהעלית?"
+          )
+        ){
+          return;
+        }
+
+        ffxDeleteOwn(
+          id,
+          type
+        );
+
+        var currentPreferred =
+          ffxGetPreferred(
+            id,
+            type
+          );
+
+        if(
+          currentPreferred &&
+          currentPreferred.own
+        ){
+          ffxRemovePreferred(
+            id,
+            type
+          );
+        }
+
+        showImage(
+          id,
+          type
+        );
+      };
+  }
+
+
+  /* Remove preferred */
+
+  var removePreferred =
+    document.getElementById(
+      "ffxRemovePreferred"
+    );
+
+  if(removePreferred){
+
+    removePreferred.onclick =
+      function(){
+
+        if(
+          !confirm(
+            "להסיר את התמונה המועדפת?"
+          )
+        ){
+          return;
+        }
+
+        ffxRemovePreferred(
+          id,
+          type
+        );
+
+        showImage(
+          id,
+          type
+        );
+      };
+  }
+
+
+  /* Search Wikimedia */
+
+  try{
+
+    var images =
+      await ffxSmartSearch(
+        plant,
+        type
+      );
+
+    var resultsBox =
+      document.getElementById(
+        "ffxSearchResults"
+      );
+
+    if(!resultsBox){
+      return;
+    }
+
+    if(!images.length){
+
+      resultsBox.innerHTML =
+        "לא נמצאו כרגע תמונות " +
+        "מתאימות מספיק.";
+
+      return;
+    }
+
+    resultsBox.className =
+      "ffx-gallery";
+
+    resultsBox.innerHTML =
+      images
+        .map(
+          function(image,index){
+
+            return ffxImageCard(
+              image,
+              index,
+              admin
+            );
+          }
+        )
+        .join("");
+
+
+    /* Preferred buttons */
+
+    resultsBox
+      .querySelectorAll(
+        "[data-ffx-pick]"
+      )
+      .forEach(
+        function(button){
+
+          button.onclick =
+            function(){
+
+              var index =
+                Number(
+                  button.getAttribute(
+                    "data-ffx-pick"
+                  )
+                );
+
+              var image =
+                images[index];
+
+              if(!image){
+                return;
+              }
+
+              ffxSavePreferred(
+                id,
+                type,
+                image
+              );
+
+              showImage(
+                id,
+                type
+              );
+            };
+        }
+      );
+
+
+    /* Reject buttons */
+
+    resultsBox
+      .querySelectorAll(
+        "[data-ffx-reject]"
+      )
+      .forEach(
+        function(button){
+
+          button.onclick =
+            function(){
+
+              var index =
+                Number(
+                  button.getAttribute(
+                    "data-ffx-reject"
+                  )
+                );
+
+              var image =
+                images[index];
+
+              if(!image){
+                return;
+              }
+
+              if(
+                !confirm(
+                  "לסמן את התמונה " +
+                  "כלא נכונה?\n" +
+                  "היא לא תוצג שוב " +
+                  "עבור הפרח הזה."
+                )
+              ){
+                return;
+              }
+
+              ffxBlock(
+                id,
+                type,
+                image.full
+              );
+
+              showImage(
+                id,
+                type
+              );
+            };
+        }
+      );
+
+  }catch(err){
+
+    var resultsBox =
+      document.getElementById(
+        "ffxSearchResults"
+      );
+
+    if(resultsBox){
+
+      resultsBox.innerHTML =
+        "לא הצלחתי להתחבר כרגע " +
+        "למאגר התמונות.";
+    }
+  }
+};
+
+
+/* =========================================================
+   START
+   ========================================================= */
+
+ffxCreateAdminButton();
+ffxApplyAdminUI();
+
+})();
 </script></body></html>
