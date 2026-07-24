@@ -30,4 +30,24 @@ $("#importFile").onchange=async e=>{try{const data=JSON.parse(await e.target.fil
 $("#resetBtn").onclick=()=>{if(confirm("לשחזר את המאגר המקורי? שינויים מקומיים יימחקו.")){plants=JSON.parse(JSON.stringify(INITIAL));favs=new Set();save();render();renderNow();}};
 render();renderNow();
 ["editDlg","imgDlg"].forEach(function(id){var el=document.getElementById(id);el.addEventListener("click",function(ev){if(ev.target===el)closeModal(el);});});
-</script></body></html>
+</script><style>
+@media(max-width:719px){
+  .app{padding-left:10px;padding-right:10px}
+  .now-row,.filters{
+    overflow-x:auto;
+    overflow-y:hidden;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    padding-inline:2px 10px;
+  }
+  .now-row::-webkit-scrollbar,.filters::-webkit-scrollbar{display:none}
+  .pill,.filter{flex:0 0 auto}
+  .toolbar{margin-inline:-10px;padding-inline:10px}
+  .search input{min-width:0}
+  .iconbtn{flex:0 0 52px;padding:0}
+  .card{padding:14px}
+  .actions{grid-template-columns:minmax(0,1fr) minmax(0,1fr) 44px}
+  .actions button{font-size:14px;padding-inline:6px}
+  .fab{left:14px;bottom:calc(14px + env(safe-area-inset-bottom))}
+}
+</style></body></html>
