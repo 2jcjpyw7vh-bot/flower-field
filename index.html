@@ -50,4 +50,313 @@ render();renderNow();
   .actions button{font-size:14px;padding-inline:6px}
   .fab{left:14px;bottom:calc(14px + env(safe-area-inset-bottom))}
 }
-</style></body></html>
+</style><script>
+/* ===== Improved flower & seed image gallery ===== */
+
+const IMAGE_PREFS_KEY = "flowerFarmImagePrefs";
+
+function getImagePrefs(){
+  try{
+    return JSON.parse(localStorage.getItem(IMAGE_PREFS_KEY) || "{}");
+  }catch(e){
+    return {};
+  }
+}
+
+function savePreferredImage(plantId,type,image){
+  const prefs=getImagePrefs();
+  prefs[plantId+"_"+type]=image;
+  localStorage.setItem(IMAGE_PREFS_KEY,JSON.stringify(prefs));
+}
+
+function getPreferredImage(plantId,type){
+  const prefs=getImagePrefs();
+  return prefs[plantId+"_"+type] || null;
+}
+
+async function searchCommonsImages(query,limit=6){
+  const api=
+    "https://commons.wikimedia.org/w/api.php?origin=*"+
+    "&action=query&format=json"+
+    "&generator=search"+
+    "&gsrnamespace=6"+
+    "&gsrlimit="+limit+
+    "&gsrsearch="+encodeURIComponent(query)+
+    "&prop=imageinfo"+
+    "&iiprop=url|extmetadata"+
+    "&iiurlwidth=900";
+
+  const controller =
+    typeof AbortController!=="undefined" ? new AbortController() : null;
+
+  const timer=controller
+    ? setTimeout(()=>controller.abort(),9000)
+    : null;
+
+  try{
+    const response=await fetch(
+      api,
+      controller ? {signal:controller.signal} : {}
+    );
+
+    if(!response.ok) throw new Error("network");
+
+    const data=await response.json();
+    const pages=Object.values(
+      data.query && data.query.pages ? data.query.pages : {}
+    );
+
+    return pages
+      .filter(p =>
+        p.imageinfo &&
+        p.imageinfo[0] &&
+        p.imageinfo[0].thumburl &&
+        !/\.svg$/i.test(p.title)
+      )
+      .map(p => {
+        const ii=p.imageinfo[0];
+        return {
+          url:ii.thumburl,
+          full:ii.url || ii.thumburl,
+          title:p.title || "",
+          page:ii.descriptionurl || "",
+          license:
+            ii.extmetadata &&
+            ii.extmetadata.LicenseShortName
+              ? ii.extmetadata.LicenseShortName.value
+              : ""
+        };
+      });
+
+  }finally{
+    if(timer) clearTimeout(timer);
+  }
+}
+
+async function getSmartImages(plant,type){
+  const latin=plant.latin || plant.name;
+  let searches;
+
+  if(type==="flower"){
+    searches=[
+      latin+" flower",
+      latin+" blossom",
+      latin+" inflorescence"
+    ];
+  }else{
+    searches=[
+      latin+" seed",
+      latin+" seeds",
+      latin+" seed pod",
+      latin+" fruit seeds"
+    ];
+  }
+
+  const results=[];
+  const seen=new Set();
+
+  for(const query of searches){
+    try{
+      const found=await searchCommonsImages(query,5);
+
+      for(const image of found){
+        if(!seen.has(image.full)){
+          seen.add(image.full);
+          results.push(image);
+        }
+        if(results.length>=8) break;
+      }
+
+      if(results.length>=8) break;
+    }catch(e){}
+  }
+
+  return results;
+}
+
+function imageGalleryCard(image,plant,type,index){
+  const safeTitle=esc(image.title || "Wikimedia Commons");
+  const safeUrl=esc(image.url);
+  const safePage=esc(image.page || "#");
+  const safeLicense=esc(image.license || "");
+
+  return `
+    <div style="
+      background:#fff;
+      border:1px solid #ddd8ca;
+      border-radius:14px;
+      padding:8px;
+      min-width:0;
+    ">
+      <img
+        src="${safeUrl}"
+        alt="${esc(plant.name)}"
+        loading="lazy"
+        style="
+          width:100%;
+          height:180px;
+          object-fit:contain;
+          background:#f5f2e9;
+          border-radius:10px;
+        "
+      >
+
+      <button
+        type="button"
+        data-pick-image="${index}"
+        style="
+          width:100%;
+          margin-top:7px;
+          border:0;
+          border-radius:10px;
+          padding:9px;
+          background:#426b4b;
+          color:white;
+        ">
+        ✓ בחר כתמונה שלי
+      </button>
+
+      <div style="
+        margin-top:6px;
+        font-size:11px;
+        color:#657064;
+        line-height:1.3;
+      ">
+        ${safeLicense ? safeLicense+" · " : ""}
+        <a
+          href="${safePage}"
+          target="_blank"
+          rel="noopener"
+          style="color:#426b4b"
+        >מקור</a>
+      </div>
+    </div>
+  `;
+}
+
+/* מחליף את פונקציית התמונות הישנה */
+showImage=async function(id,type){
+  const plant=plants.find(p=>p.id===id);
+  if(!plant) return;
+
+  $("#imgTitle").textContent=
+    (type==="flower" ? "🌸 " : "🌾 ")+plant.name;
+
+  $("#imgMeta").innerHTML="";
+  openModal($("#imgDlg"));
+
+  const preferred=getPreferredImage(id,type);
+
+  $("#imgBox").innerHTML=preferred
+    ? `
+      <div style="width:100%">
+        <div style="
+          font-size:13px;
+          margin-bottom:8px;
+          color:#426b4b;
+          font-weight:700;
+        ">
+          ★ התמונה שבחרת
+        </div>
+
+        <img
+          src="${esc(preferred.url)}"
+          alt="${esc(plant.name)}"
+          style="
+            width:100%;
+            max-height:320px;
+            object-fit:contain;
+            border-radius:14px;
+            background:#f5f2e9;
+          "
+        >
+
+        <div
+          id="moreImageResults"
+          class="loading"
+          style="padding:18px 5px"
+        >
+          מחפש גם תמונות חלופיות…
+        </div>
+      </div>
+    `
+    : `<div class="loading">מחפש כמה תמונות מתאימות…</div>`;
+
+  try{
+    const images=await getSmartImages(plant,type);
+
+    if(!images.length)
+      throw new Error("no images");
+
+    const gallery=`
+      <div style="width:100%">
+        ${
+          preferred
+          ? `<div style="
+               margin:14px 0 8px;
+               font-size:13px;
+               font-weight:700;
+             ">תמונות חלופיות</div>`
+          : ""
+        }
+
+        <div style="
+          display:grid;
+          grid-template-columns:repeat(2,minmax(0,1fr));
+          gap:9px;
+          width:100%;
+        ">
+          ${images.slice(0,4)
+            .map((img,i)=>imageGalleryCard(img,plant,type,i))
+            .join("")}
+        </div>
+      </div>
+    `;
+
+    if(preferred){
+      const more=document.getElementById("moreImageResults");
+      if(more) more.outerHTML=gallery;
+    }else{
+      $("#imgBox").innerHTML=gallery;
+    }
+
+    $("#imgBox")
+      .querySelectorAll("[data-pick-image]")
+      .forEach(btn=>{
+        btn.onclick=function(){
+          const image=images[Number(this.dataset.pickImage)];
+          savePreferredImage(id,type,image);
+
+          this.textContent="★ נשמרה";
+          this.style.background="#d6a831";
+
+          setTimeout(()=>{
+            showImage(id,type);
+          },350);
+        };
+      });
+
+  }catch(err){
+    const search=
+      "https://commons.wikimedia.org/wiki/Special:MediaSearch"+
+      "?type=image&search="+
+      encodeURIComponent(
+        (plant.latin||plant.name)+
+        (type==="flower" ? " flower" : " seed")
+      );
+
+    if(!preferred){
+      $("#imgBox").innerHTML=`
+        <div class="loading">
+          לא הצלחתי למצוא כרגע תמונות מתאימות.<br><br>
+          <a
+            href="${search}"
+            target="_blank"
+            rel="noopener"
+          >חיפוש ידני ב-Wikimedia Commons</a>
+        </div>
+      `;
+    }
+  }
+};
+</script></body></html>
